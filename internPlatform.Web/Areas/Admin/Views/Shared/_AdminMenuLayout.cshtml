@@ -1,0 +1,155 @@
+﻿@{
+
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    <link rel="stylesheet" href="~/Content/navbar.css" />
+    <script src="~/Scripts/jquery-ui-1.13.2.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery-ui-1.13.2.js" type="text/javascript"></script>
+    <!-- Include one of jTable styles. -->
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/Scripts/jtable/themes/metro/darkgray/jtable.min.css" rel="stylesheet" type="text/css" />
+    <!-- Include jTable script file. -->
+    <link rel="stylesheet" href="//cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css" />
+    <script type="text/javascript" src="//cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="~/Scripts/jtable/jquery.jtable.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="~/Content/bootstrap-icons-1.11.3/font/bootstrap-icons.css" />
+    <script src="~/Scripts/navbar.js"></script>
+
+
+</head>
+<body>
+    <header>
+        <div id="nav-bar" style="z-index:100">
+            <input id="nav-toggle" type="checkbox" />
+            <div id="nav-header">
+                <a id="nav-title" href="@Url.Action("Index", "Dashboard", new { area = "Admin" })" > 
+                    <i class="fas bi bi-speedometer2 h5"></i>
+                    <span>Dashboard</span>
+                </a>
+                <label for="nav-toggle"><span id="nav-toggle-burger"></span></label>
+                <hr />
+            </div>
+            <div id="nav-content">
+                @if (User.IsInRole("SuperAdmin"))
+                {
+                    <div class="nav-button d-flex flex-row align-items-center">
+                        <a href="@Url.Action("Entities", "Dashboard", new { area = "Admin" })" class="d-flex align-items-center px-2 @(ViewBag.Title == "Entities" ? "active" : "")">
+                            <i class="bi bi-boxes"></i>
+                            &nbsp;
+                            <span class="m-0 p-0">Entities</span>
+                        </a>
+                    </div>
+                    <div class="nav-button d-flex flex-row align-items-center">
+                        <a href="@Url.Action("Links", "Dashboard", new { area = "Admin" })" class="d-flex align-items-center px-2 @(ViewBag.Title == "Links" ? "active" : "")">
+                            <i class="bi bi-link-45deg"></i>
+                            &nbsp;
+                            <span class="m-0 p-0">Links</span>
+                        </a>
+                    </div>
+                    <div class="nav-button d-flex flex-row align-items-center">
+                        <a href="@Url.Action("Orders", "Dashboard", new { area = "Admin" })" class="d-flex align-items-center px-2 @(ViewBag.Title == "Orders" ? "active" : "")">
+                            <i class="bi bi-boxes"></i>
+                            &nbsp;
+                            <span class="m-0 p-0">Orders</span>
+                        </a>
+                    </div>
+                    <div class="nav-button d-flex flex-row align-items-center">
+                        <a href="@Url.Action("Users", "Dashboard", new { area = "Admin" })" class="d-flex align-items-center px-2 @(ViewBag.Title == "Users" ? "active" : "")">
+                            <i class="bi bi-people-fill"></i>
+                            &nbsp;
+                            <span class="m-0 p-0">Users</span>
+                        </a>
+                    </div>
+
+
+                }
+                <div class="nav-button d-flex flex-row align-items-center">
+                    <a href="@Url.Action("Events", "Dashboard", new { area = "Admin" })" class="d-flex align-items-center px-2 @(ViewBag.Title == "Events" ? "active" : "")">
+                        <i class="bi bi-calendar4-event"></i>
+                        &nbsp;
+                        <span class="m-0 p-0">Events</span>
+                    </a>
+                </div>
+            </div>
+            <input id="nav-footer-toggle" type="checkbox" />s
+
+                @Html.Partial("_AdminLoginPartial")
+
+        </div>
+    </header>
+        <div class="row col-12 d-flex flex-row justify-content-end">
+            <div class="row d-flex flex-row  col-10 col-lg-10 px-5">
+                @*<div class="bg-dark p-3" style="height: 100vh; width:280px">
+                    <nav class="navbar  navbar-dark m-0 p-0 w-100 h-100">
+                        <div class="d-flex flex-column w-100  bg-dark h-100">
+                            <a href="/Admin/Dashboard/Index" class="text-decoration-none"> <h3 class="col-12 text-center mt-3 text-white "> <i class="bi bi-speedometer2 h4"></i>&nbsp; Dashboard</h3> </a>
+                            <hr>
+                            <ul class="navbar-nav flex-column gap-2 mb-auto">
+                                @if (User.IsInRole("SuperAdmin"))
+                                {
+                                    <li class="nav-item">
+                                        @Html.ActionLink("Entities", "Entities", "Dashboard", new { area = "Admin" }, new { @class = $"nav-link btn btn-primary w-100  btn-outline-primary {(ViewBag.Title == "Entities" ? " active" : "")} " })
+                                    </li>
+
+                                    <li class="nav-item">
+                                        @Html.ActionLink("Links", "Links", "Dashboard", new { area = "Admin" }, new { @class = $"nav-link btn btn-primary  w-100  btn-outline-primary {(ViewBag.Title == "Links" ? " active" : "")}" })
+                                    </li>
+
+                                    <li class="nav-item">
+                                        @Html.ActionLink("Orders", "Orders", "Dashboard", new { area = "Admin" }, new { @class = $"nav-link btn btn-primary  w-100 btn-outline-primary {(ViewBag.Title == "Orders" ? " active" : "")}" })
+                                    </li>
+
+                                    <li class="nav-item">
+
+                                        @Html.ActionLink("Users", "Users", "Dashboard", new { area = "Admin" }, new { @class = $" nav-link btn btn-primary  w-100 btn-outline-primary {(ViewBag.Title == "Users" ? " active" : "")}" })
+                                    </li>
+                                }
+
+                                <li>
+                                    @Html.ActionLink("Events", "Events", "Dashboard", new { area = "Admin" }, new { @class = $"nav-link btn btn-primary w-100 btn-outline-primary {(ViewBag.Title == "Events" ? " active" : "")}" })
+                                </li>
+
+                            </ul>
+                            <hr>
+
+                            <div class="dropdown">
+                                <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                                    <strong>mdo</strong>
+                                </a>
+                                @Html.Partial("_LoginPartial")
+                            </div>
+                        </div>
+                    </nav>
+                </div>*@
+
+                <div class="py-5 overflow-y-auto col-12" style="height:100vh;  ">
+                    @RenderBody()
+                    <hr />
+                </div>
+            </div>
+        </div>
+        
+
+
+
+
+
+
+        @RenderSection("scripts", required: false)
+</body>
+</html>
+
