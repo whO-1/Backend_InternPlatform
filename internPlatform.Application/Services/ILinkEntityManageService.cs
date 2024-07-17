@@ -1,14 +1,12 @@
 ﻿using internPlatform.Domain.Entities;
+using internPlatform.Domain.Entities.DTO;
 using internPlatform.Domain.Models.ViewModels;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace internPlatform.Application.Services
 {
-    public interface ILinkEntityManageService : IEntityManageService<Link>
+    public interface ILinkEntityManageService : IEntityManageService<Link, LinkDTO>
     {
         List<JTSelectListItem> GetOptions();
         Task<bool> ValidateNewLink(Link updatedLink);

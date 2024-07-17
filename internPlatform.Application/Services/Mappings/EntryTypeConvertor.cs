@@ -6,6 +6,7 @@ namespace internPlatform.Application.Services.Mappings
 {
     public class EntryTypeConvertor : IBaseConvertor<EntryType, EntryTypeDTO>
     {
+        public EntryTypeConvertor() { }
         public EntryType DTOToEntity(EntryTypeDTO obj)
         {
             throw new NotImplementedException();

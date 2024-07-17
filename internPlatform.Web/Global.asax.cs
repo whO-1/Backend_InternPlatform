@@ -2,6 +2,9 @@ using Autofac;
 using Autofac.Integration.Mvc;
 using internPlatform.App_Start;
 using internPlatform.Application.Services;
+using internPlatform.Application.Services.Mappings;
+using internPlatform.Domain.Entities;
+using internPlatform.Domain.Entities.DTO;
 using internPlatform.Infrastructure.Data;
 using internPlatform.Infrastructure.Repository;
 using internPlatform.Infrastructure.Repository.IRepository;
@@ -42,7 +45,15 @@ namespace internPlatform.Web
             //DI 
             builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>));
             builder.RegisterType<UserRoleService>().As<IUserRoleService>();
-            builder.RegisterGeneric(typeof(EntityManageService<>)).As(typeof(IEntityManageService<>));
+
+
+            //builder.RegisterGeneric(typeof(BaseConvertor<,>)).As(typeof(IBaseConvertor<,>));
+            builder.RegisterType<EntryTypeConvertor>().As<IBaseConvertor<EntryType, EntryTypeDTO>>();
+            builder.RegisterType<AgeGroupConvertor>().As<IBaseConvertor<AgeGroup, AgeGroupDTO>>();
+            builder.RegisterType<LinkConvertor>().As<IBaseConvertor<Link, LinkDTO>>();
+            builder.RegisterType<CategoryConvertor>().As<IBaseConvertor<Category, CategoryDTO>>();
+
+            builder.RegisterGeneric(typeof(EntityManageService<,>)).As(typeof(IEntityManageService<,>));
             builder.RegisterType<LinkEntityManageService>().As<ILinkEntityManageService>();
             builder.RegisterType<EventManageService>().As<IEventManageService>();
             builder.RegisterType<ApiService>().As<IApiService>();

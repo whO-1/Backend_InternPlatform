@@ -6,6 +6,7 @@ namespace internPlatform.Application.Services.Mappings
 {
     public class LinkConvertor : IBaseConvertor<Link, LinkDTO>
     {
+        public LinkConvertor() { }
         public Link DTOToEntity(LinkDTO obj)
         {
             throw new NotImplementedException();

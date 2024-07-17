@@ -1,35 +1,50 @@
-﻿using internPlatform.Domain.Entities;
-using internPlatform.Domain.Models.ViewModels;
+﻿using internPlatform.Application.Services.Mappings;
 using internPlatform.Infrastructure.Repository.IRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using System.Web.Mvc;
 
 namespace internPlatform.Application.Services
 {
-    public class EntityManageService<T> : IEntityManageService <T> where T : class
+    public class EntityManageService<T, T_DTO> : IEntityManageService<T, T_DTO>
+        where T : class
+        where T_DTO : class
+
     {
         private readonly IRepository<T> _repository;
-        public EntityManageService(IRepository<T> repository) 
+        private readonly IBaseConvertor<T, T_DTO> _mapper;
+        public EntityManageService(IRepository<T> repository, IBaseConvertor<T, T_DTO> mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
-        public async Task<T> Get(Expression<Func<T, bool>> filter, string includeProperties = null)
+        public async Task<T_DTO> Get(Expression<Func<T, bool>> filter, string includeProperties = null)
         {
-            return await _repository.Get(filter, includeProperties);
+            T entity = await _repository.Get(filter, includeProperties);
+            return _mapper.EntityToDTO(entity);
         }
 
-        public IEnumerable<T> GetAll(Expression<Func<T, bool>> filter = null,string includeProperties = null)
+        public IEnumerable<T_DTO> GetAll(Expression<Func<T, bool>> filter = null, string includeProperties = null)
         {
-            return _repository.GetAll(filter,includeProperties);
+            List<T_DTO> DTOentities = new List<T_DTO>();
+            IEnumerable<T> entities = _repository.GetAll(filter, includeProperties);
+            var en = entities.GetEnumerator();
+            if (en != null)
+            {
+                do
+                {
+                    DTOentities.Add(_mapper.EntityToDTO(en.Current));
+
+                } while (en.MoveNext());
+            }
+            return DTOentities;
         }
 
         public T Add(T entity)
         {
-           return _repository.Add(entity);
+            return _repository.Add(entity);
         }
 
         public async Task<T> Remove(int Id)
@@ -44,10 +59,10 @@ namespace internPlatform.Application.Services
 
         public async Task<T> Remove(Expression<Func<T, bool>> filter, string includeProperties = null)
         {
-            T entity =  await _repository.Get(filter, includeProperties);
-            if(entity != null)
+            T entity = await _repository.Get(filter, includeProperties);
+            if (entity != null)
             {
-                return _repository.Remove(entity); 
+                return _repository.Remove(entity);
             }
             return null;
         }
@@ -63,12 +78,12 @@ namespace internPlatform.Application.Services
         }
         public async Task<bool> Save()
         {
-             var result = await _repository.Save();
+            var result = await _repository.Save();
             if (result > 0)
             {
                 return true;
             }
-            else 
+            else
             {
                 return false;
             }

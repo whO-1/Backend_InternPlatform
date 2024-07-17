@@ -6,10 +6,12 @@ using System.Web.Mvc;
 
 namespace internPlatform.Web.Areas.Admin.Controllers.JTableControllers
 {
-    public class GenericController <T> : Controller where T : class 
+    public class GenericController<T, T_DTO> : Controller
+        where T : class
+        where T_DTO : class
     {
-        private readonly IEntityManageService<T> _service;
-        public GenericController(IEntityManageService<T> service )
+        private readonly IEntityManageService<T, T_DTO> _service;
+        public GenericController(IEntityManageService<T, T_DTO> service)
         {
             _service = service;
         }
@@ -20,7 +22,7 @@ namespace internPlatform.Web.Areas.Admin.Controllers.JTableControllers
         {
             try
             {
-                IEnumerable<T> result = _service.GetAll();
+                IEnumerable<T_DTO> result = _service.GetAll();
                 return Json(new { Result = "OK", Records = result });
             }
             catch (Exception ex)
@@ -47,7 +49,7 @@ namespace internPlatform.Web.Areas.Admin.Controllers.JTableControllers
 
 
         [HttpPost]
-        public  async Task<JsonResult> DeleteEntity(int Id)
+        public async Task<JsonResult> DeleteEntity(int Id)
         {
             try
             {

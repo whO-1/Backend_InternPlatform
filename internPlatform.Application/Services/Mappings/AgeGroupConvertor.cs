@@ -5,6 +5,7 @@ namespace internPlatform.Application.Services.Mappings
 {
     public class AgeGroupConvertor : IBaseConvertor<AgeGroup, AgeGroupDTO>
     {
+        public AgeGroupConvertor() { }
         public AgeGroup DTOToEntity(AgeGroupDTO obj)
         {
             throw new System.NotImplementedException();

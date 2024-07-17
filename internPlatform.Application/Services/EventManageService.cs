@@ -17,13 +17,13 @@ namespace internPlatform.Application.Services
 
         private readonly IRepository<Event> _repository;
         private readonly IRepository<Category> _repositoryCategory;
-        private readonly IEntityManageService<AgeGroup> _serviceAge;
-        private readonly IEntityManageService<EntryType> _serviceEntry;
+        private readonly IEntityManageService<AgeGroup, AgeGroupDTO> _serviceAge;
+        private readonly IEntityManageService<EntryType, EntryTypeDTO> _serviceEntry;
         public EventManageService(
             IRepository<Event> repository,
             IRepository<Category> repositoryCategory,
-            IEntityManageService<AgeGroup> serviceAge,
-            IEntityManageService<EntryType> serviceEntry
+            IEntityManageService<AgeGroup, AgeGroupDTO> serviceAge,
+            IEntityManageService<EntryType, EntryTypeDTO> serviceEntry
         )
         {
             _repository = repository;
@@ -59,12 +59,12 @@ namespace internPlatform.Application.Services
                     Id = e.EventId,
                     Title = e.Title,
                     Description = e.Description,
-                    Age = e.Age,
-                    Entry = e.Entry,
                     Categories = e.Categories.Select(c => c.Name).ToList(),
                     AuthorId = e.AuthorId,
                     SpecialGuests = e.SpecialGuests,
-                    TimeStamp = e.TimeStamp,
+                    //
+                    //
+
                 });
             });
 
@@ -131,38 +131,33 @@ namespace internPlatform.Application.Services
                 Event OldEvent = await Get(e => e.EventId == Id, includeProperties: "Entry,Age");
                 if (OldEvent != null)
                 {
-                    model.Event = OldEvent;
+                    // model.Event = OldEvent;
                     model.SelectedCategories = OldEvent.Categories.Select(ec => ec.CategoryId).ToList();
                 }
             }
             else
             {
-                model.Event = new Event
-                {
-                    EventId = 0,
-                    AuthorId = CurrentUser,
-                };
+                model.Id = 0;
+                model.AuthorId = CurrentUser;
             }
-
             PopulateWithEntities(model);
             return model;
         }
 
-        //public  IEnumerable<Category> GetCategories(Event entity)
-        //{
-
-        //}
-
-
 
         public EventUpSertViewModel PopulateWithEntities(EventUpSertViewModel entity)
         {
-            entity.Categories = _repositoryCategory.GetAll();
+            entity.Categories = _repositoryCategory.GetAll().Select(c => new CategoryDTO
+            {
+                CategoryId = c.CategoryId,
+                Name = c.Name,
+                DisplayOrder = c.DisplayOrder,
+            }).ToList();
             entity.AgeGroups = _serviceAge.GetAll();
             entity.EntryTypes = _serviceEntry.GetAll();
             entity.SelectedCategories = (entity.SelectedCategories != null) ? entity.SelectedCategories : new List<int>();
-            entity.Latitude = entity.Event.EventLocation.Latitude.ToString();
-            entity.Longitude = entity.Event.EventLocation.Longitude.ToString();
+            entity.Latitude = entity.EventLocation.Latitude.ToString();
+            entity.Longitude = entity.EventLocation.Longitude.ToString();
             return entity;
         }
 
@@ -171,25 +166,26 @@ namespace internPlatform.Application.Services
 
             if (model.Longitude != null && model.Latitude != null)
             {
-                model.Event.EventLocation.Longitude = double.Parse(model.Longitude, CultureInfo.InvariantCulture);
-                model.Event.EventLocation.Latitude = double.Parse(model.Latitude, CultureInfo.InvariantCulture);
+                model.EventLocation.Longitude = double.Parse(model.Longitude, CultureInfo.InvariantCulture);
+                model.EventLocation.Latitude = double.Parse(model.Latitude, CultureInfo.InvariantCulture);
             }
-            Event getEvent = await _repository.Get(e => e.EventId == model.Event.EventId, "Categories");
+            Event getEvent = await _repository.Get(e => e.EventId == model.Id, "Categories");
             bool isNewEvent = (getEvent == null) ? true : false;
             var categories = (model.SelectedCategories != null) ? _repositoryCategory.GetAll(c => model.SelectedCategories.Contains(c.CategoryId)).ToList() : null;
 
             if (isNewEvent) { getEvent = new Event(); }
-            getEvent.EventId = model.Event.EventId;
-            getEvent.Title = model.Event.Title;
-            getEvent.Description = model.Event.Description;
-            getEvent.AuthorId = model.Event.AuthorId;
-            getEvent.StartDate = model.Event.StartDate;
-            getEvent.EndDate = model.Event.EndDate;
-            getEvent.AgeGroupId = model.Event.AgeGroupId;
-            getEvent.SpecialGuests = model.Event.SpecialGuests;
-            getEvent.EventLocation = model.Event.EventLocation;
+
+            getEvent.EventId = model.Id;
+            getEvent.Title = model.Title;
+            getEvent.Description = model.Description;
+            getEvent.AuthorId = model.AuthorId;
+            getEvent.StartDate = model.StartDate;
+            getEvent.EndDate = model.EndDate;
+            getEvent.AgeGroupId = model.AgeGroupId;
+            getEvent.SpecialGuests = model.SpecialGuests;
+            getEvent.EventLocation = model.EventLocation;
             getEvent.Categories = categories;
-            getEvent.EntryTypeId = model.Event.EntryTypeId;
+            getEvent.EntryTypeId = model.EntryTypeId;
 
             if (isNewEvent)
             {
@@ -199,7 +195,6 @@ namespace internPlatform.Application.Services
             {
                 Update(getEvent);
             }
-
             bool result = await Save();
             return result;
         }

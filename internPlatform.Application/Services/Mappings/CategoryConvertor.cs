@@ -5,7 +5,7 @@ namespace internPlatform.Application.Services.Mappings
 {
     public class CategoryConvertor : IBaseConvertor<Category, CategoryDTO>
     {
-
+        public CategoryConvertor() { }
         public CategoryDTO EntityToDTO(Category entity)
         {
             return new CategoryDTO

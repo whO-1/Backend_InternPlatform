@@ -162,7 +162,6 @@ StyleCopReport.xml
 *.shfb
 *.editorconfig
 *.resjson
-*.sln
 *.props
 
 # OS generated files #

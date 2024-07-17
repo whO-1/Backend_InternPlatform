@@ -161,6 +161,11 @@
     <Compile Include="Services\ILinkEntityManageService.cs" />
     <Compile Include="Services\IUserRoleService.cs" />
     <Compile Include="Services\LinkEntityManageService.cs" />
+    <Compile Include="Services\Mappings\AgeGroupConvertor.cs" />
+    <Compile Include="Services\Mappings\CategoryConvertor.cs" />
+    <Compile Include="Services\Mappings\EntryTypeConvertor.cs" />
+    <Compile Include="Services\Mappings\IBaseConvertor.cs" />
+    <Compile Include="Services\Mappings\LinkConvertor.cs" />
     <Compile Include="Services\UserRoleService.cs" />
   </ItemGroup>
   <ItemGroup>

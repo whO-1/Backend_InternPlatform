@@ -1,16 +1,13 @@
 ﻿using internPlatform.Application.Services;
 using internPlatform.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+using internPlatform.Domain.Entities.DTO;
+
 
 namespace internPlatform.Web.Areas.Admin.Controllers.JTableControllers
 {
-    public class EntryTypeController : GenericController<EntryType>
+    public class EntryTypeController : GenericController<EntryType, EntryTypeDTO>
     {
-        public EntryTypeController(IEntityManageService<EntryType> service) : base(service)
+        public EntryTypeController(IEntityManageService<EntryType, EntryTypeDTO> service) : base(service)
         {
         }
     }
