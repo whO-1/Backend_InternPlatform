@@ -1,0 +1,125 @@
+﻿
+@{
+    ViewBag.Title = "CreateEvent";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminMenuLayout.cshtml";
+}
+
+<h2>CreateEvent</h2>
+
+<form>
+    <div class="container d-flex flex-column align-items-center">
+        <div class=" row col-12 col-lg-7 mt-3">
+            <label for="title">Title</label>
+            <input class="p-2" type="text" id="title" name="title">
+        </div>
+        <div class="row col-12 col-lg-7 mt-3">
+            <label for="description">Description</label>
+            <textarea class="p-2" style="height:100px; overflow:auto; resize:none" name="description" id="description"></textarea>
+        </div>
+        <div class="row col-12 col-lg-7 mt-3">
+            <label for="author">Special guests</label>
+            <input class="p-2" type="text" name="author" id="author">
+        </div>
+
+
+
+        <div class="row col-12 col-lg-7  mt-3">
+            <label>Age Group </label>
+            <fieldset class="d-flex flex-row justify-content-center">
+                <div class="col-3">
+                    <input type="radio" id="All" name="checkbox1" value="All" checked />
+                    <label for="Paid">All</label>
+                </div>
+                <div class="col-3 ">
+                    <input type="radio" id="Over18" name="checkbox1" value="Over18" />
+                    <label for="Free">Over 18</label>
+                </div>
+                <div class="col-3">
+                    <input type="radio" id="Children" name="checkbox1" value="Children" />
+                    <label for="Paid">Children</label>
+                </div>
+            </fieldset>
+        </div>
+
+
+        <div class="row col-12 col-lg-7  mt-3">
+            <label>Entry </label>
+            <fieldset class="d-flex flex-row justify-content-center">
+                <div class="col-3 ">
+                    <input type="radio" id="Free" name="checkbox2" value="Free" checked />
+                    <label for="Free">Free</label>
+                </div>
+                <div class="col-3">
+                    <input type="radio" id="Paid" name="checkbox2" value="Paid" />
+                    <label for="Paid">Paid</label>
+                </div>
+            </fieldset>
+        </div>
+
+
+        <div class="col-12 col-lg-7 mt-3"> 
+            <fieldset>
+                <legend>Categories</legend>
+                <div class="row container-fluid">
+                    <div class="col p-2 text-nowrap ">
+                        <input type="checkbox" id="coding" name="interest" value="coding" />
+                        <label for="coding">Coding</label>
+                    </div>
+                    <div class="col p-2 text-nowrap">
+                        <input type="checkbox" id="music" name="interest" value="music" />
+                        <label for="music">Music</label>
+                    </div>
+                    <div class="col p-2 text-nowrap">
+                        <input type="checkbox" id="coding" name="interest" value="coding" />
+                        <label for="coding">Coding</label>
+                    </div>
+                    <div class="col p-2 text-nowrap">
+                        <input type="checkbox" id="music" name="interest" value="music" />
+                        <label for="music">Music</label>
+                    </div>
+                    <div class="col p-2 text-nowrap">
+                        <input type="checkbox" id="coding" name="interest" value="coding" />
+                        <label for="coding">Coding</label>
+                    </div>
+                    <div class="col p-2 text-nowrap">
+                        <input type="checkbox" id="music" name="interest" value="music" />
+                        <label for="music">Music</label>
+                    </div>
+                    <div class="col p-2 text-nowrap">
+                        <input type="checkbox" id="coding" name="interest" value="coding" />
+                        <label for="coding">Coding</label>
+                    </div>
+                    <div class="col p-2 text-nowrap">
+                        <input type="checkbox" id="music" name="interest" value="music" />
+                        <label for="music">Music</label>
+                    </div>
+                    <div class="col p-2 text-nowrap">
+                        <input type="checkbox" id="coding" name="interest" value="coding" />
+                        <label for="coding">Coding</label>
+                    </div>
+                    <div class="col p-2 text-nowrap">
+                        <input type="checkbox" id="music" name="interest" value="music" />
+                        <label for="music">Music</label>
+                    </div>
+                    <div class="col p-2 text-nowrap">
+                        <input type="checkbox" id="coding" name="interest" value="coding" />
+                        <label for="coding">Coding</label>
+                    </div>
+                    <div class="col p-2 text-nowrap">
+                        <input type="checkbox" id="music" name="interest" value="music" />
+                        <label for="music">Music</label>
+                    </div>
+                </div>
+                
+            </fieldset>
+        </div>
+        
+
+
+
+        <div class="row col-12 col-lg-7 mt-3 d-flex justify-content-end">
+            <button class="col-2 p-2 btn btn-outline-dark" type="submit">Create</button>
+        </div>
+
+    </div>
+</form>
