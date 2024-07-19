@@ -11,12 +11,11 @@ namespace internPlatform.Application.Services
     {
         Task<T_DTO> Get(Expression<Func<T, bool>> filter, string includeProperties = null);
         IEnumerable<T_DTO> GetAll(Expression<Func<T, bool>> filter = null, string includeProperties = null);
-        T Add(T entity);
-        void Update(T entity);
-
-        Task<T> Remove(int Id);
-        Task<T> Remove(Expression<Func<T, bool>> filter, string includeProperties = null);
-        void RemoveRange(IEnumerable<T> entity);
+        Task<T_DTO> Add(T_DTO entityDTO);
+        Task<bool> Remove(int Id);
+        Task<bool> Remove(Expression<Func<T, bool>> filter, string includeProperties = null);
+        Task<bool> RemoveRange(IEnumerable<T> entity);
+        Task<bool> Update(T entity);
         Task<bool> Save();
     }
 }

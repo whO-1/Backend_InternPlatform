@@ -4,7 +4,6 @@ using internPlatform.Domain.Entities.DTO;
 using internPlatform.Domain.Models.ViewModels;
 using internPlatform.Infrastructure.Repository.IRepository;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace internPlatform.Application.Services
@@ -12,7 +11,7 @@ namespace internPlatform.Application.Services
     public class LinkEntityManageService : EntityManageService<Link, LinkDTO>, ILinkEntityManageService
     {
         private readonly IRepository<Link> _repository;
-        public LinkEntityManageService(IRepository<Link> repository, LinkConvertor mapper) : base(repository, mapper)
+        public LinkEntityManageService(IRepository<Link> repository, IBaseConvertor<Link, LinkDTO> mapper) : base(repository, mapper)
         {
             _repository = repository;
 
@@ -30,13 +29,11 @@ namespace internPlatform.Application.Services
                 }
             );
 
-            if (results.Any())
+            foreach (var r in results)
             {
-                foreach (var r in results)
-                {
-                    options.Add(new JTSelectListItem { Value = r.Id.ToString(), DisplayText = r.LinkTitle });
-                }
+                options.Add(new JTSelectListItem { Value = r.Id.ToString(), DisplayText = r.LinkTitle, Selected = false });
             }
+
             return options;
         }
 

@@ -158,6 +158,8 @@
     <Compile Include="Models\PaginatedList.cs" />
     <Compile Include="Models\PaginationOptions.cs" />
     <Compile Include="Models\ViewModels\AccountViewModels.cs" />
+    <Compile Include="Models\ViewModels\ApiEventViewModel.cs" />
+    <Compile Include="Models\ViewModels\BrifEventViewModel.cs" />
     <Compile Include="Models\ViewModels\EventUpSertViewModel.cs" />
     <Compile Include="Models\ViewModels\JTSelectListItem.cs" />
     <Compile Include="Models\ViewModels\ManageViewModels.cs" />

@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    console.log("loaded")
+    console.log("dataTable events")
     try {
         loadDataTable();
 
@@ -16,7 +16,7 @@ function loadDataTable() {
         "ajax": { url: '/admin/dashboard/eventsgetall' },
         "columns": [
             {
-                data: 'TimeStamp.UpdateDate',
+                data: 'LastUpdate',
                 "width": "5%",
                 "render": function (data) {
                             // Parse the /Date(xxxxx)/ format and convert to Date object
@@ -31,10 +31,10 @@ function loadDataTable() {
             },
             { data: 'Title', "width": "20%" },
             { data: 'Description', "width": "25%" },
-            { data: 'AuthorId', "width": "15%" },
-            { data: 'Entry.Name', "width": "5%" },
-            { data: 'Age.Name', "width": "5%" },
-            { data: 'Categories', "width": "5%" },
+            { data: 'Author', "width": "15%" },
+            { data: 'EntryType', "width": "5%" },
+            { data: 'AgeGroup', "width": "5%" },
+            { data: 'SelectedCategories', "width": "5%" },
             { data: 'SpecialGuests', "width": "10%" },
             {
                 data: 'Id',
@@ -84,15 +84,3 @@ function Delete(url) {
     });
 }                 
 
-function parseDotNetDate(dotNetDate) {
-    // Extract the milliseconds from the /Date(xxxxx)/ format
-    const timestamp = parseInt(dotNetDate.replace(/\/Date\((-?\d+)\)\//, '$1'));
-
-    // Create a new Date object using the timestamp
-    const date = new Date(timestamp);
-
-    // Format the date as needed (e.g., yyyy-MM-dd)
-    const formattedDate = date.toISOString().split('T')[0]; // Example: 1919-12-31
-
-    return formattedDate;
-}

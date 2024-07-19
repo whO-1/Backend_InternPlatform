@@ -10,7 +10,7 @@ namespace internPlatform.Web.Areas.Admin.Controllers.JTableControllers
         where T : class
         where T_DTO : class
     {
-        private readonly IEntityManageService<T, T_DTO> _service;
+        protected readonly IEntityManageService<T, T_DTO> _service;
         public GenericController(IEntityManageService<T, T_DTO> service)
         {
             _service = service;
@@ -33,12 +33,11 @@ namespace internPlatform.Web.Areas.Admin.Controllers.JTableControllers
 
 
         [HttpPost]
-        public async Task<JsonResult> CreateEntity(T entity)
+        public async Task<JsonResult> CreateEntity(T_DTO entity)
         {
             try
             {
-                T result = _service.Add(entity);
-                await _service.Save();
+                T_DTO result = await _service.Add(entity);
                 return Json(new { Result = "OK", Record = result }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
@@ -53,8 +52,7 @@ namespace internPlatform.Web.Areas.Admin.Controllers.JTableControllers
         {
             try
             {
-                T result = await _service.Remove(Id);
-                await _service.Save();
+                await _service.Remove(Id);
                 return Json(new { Result = "OK" });
             }
             catch (Exception ex)
@@ -70,8 +68,7 @@ namespace internPlatform.Web.Areas.Admin.Controllers.JTableControllers
         {
             try
             {
-                _service.Update(category);
-                await _service.Save();
+                await _service.Update(category);
                 return Json(new { Result = "OK" });
             }
             catch (Exception ex)

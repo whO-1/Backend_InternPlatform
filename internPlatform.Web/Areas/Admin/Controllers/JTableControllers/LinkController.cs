@@ -9,13 +9,11 @@ namespace internPlatform.Web.Areas.Admin.Controllers.JTableControllers
 {
     public class LinkController : GenericController<Link, LinkDTO>
     {
-        private readonly ILinkEntityManageService _service;
+        private new readonly ILinkEntityManageService _service;
         public LinkController(ILinkEntityManageService service) : base(service)
         {
             _service = service;
         }
-
-
 
         [HttpPost]
         public JsonResult GetOptions()
@@ -31,8 +29,6 @@ namespace internPlatform.Web.Areas.Admin.Controllers.JTableControllers
             }
         }
 
-
-
         [HttpPost]
         public override async Task<JsonResult> UpdateEntity(Link updatedLink)
         {
@@ -41,8 +37,7 @@ namespace internPlatform.Web.Areas.Admin.Controllers.JTableControllers
                 bool result = await _service.ValidateNewLink(updatedLink);
                 if (result)
                 {
-                    _service.Update(updatedLink);
-                    await _service.Save();
+                    await _service.Update(updatedLink);
                     return Json(new { Result = "OK" });
                 }
                 return Json(new { Result = "ERROR", Message = "Not valid Entry" });

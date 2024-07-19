@@ -30,55 +30,57 @@ namespace internPlatform.Application.Services
         {
             List<T_DTO> DTOentities = new List<T_DTO>();
             IEnumerable<T> entities = _repository.GetAll(filter, includeProperties);
-            var en = entities.GetEnumerator();
-            if (en != null)
+            foreach (var item in entities)
             {
-                do
-                {
-                    DTOentities.Add(_mapper.EntityToDTO(en.Current));
-
-                } while (en.MoveNext());
+                DTOentities.Add(_mapper.EntityToDTO(item));
             }
             return DTOentities;
         }
 
-        public T Add(T entity)
+        public async Task<T_DTO> Add(T_DTO entityDTO)
         {
-            return _repository.Add(entity);
+            T entity = _mapper.DTOToEntity(entityDTO);
+            var result = _repository.Add(entity);
+            await Save();
+            return _mapper.EntityToDTO(result);
         }
 
-        public async Task<T> Remove(int Id)
+        public async Task<bool> Remove(int Id)
         {
             T entity = await _repository.GetById(Id);
             if (entity != null)
             {
-                return _repository.Remove(entity);
+                _repository.Remove(entity);
+                return await Save();
             }
-            return null;
+            return false;
         }
 
-        public async Task<T> Remove(Expression<Func<T, bool>> filter, string includeProperties = null)
+        public async Task<bool> Remove(Expression<Func<T, bool>> filter, string includeProperties = null)
         {
             T entity = await _repository.Get(filter, includeProperties);
             if (entity != null)
             {
-                return _repository.Remove(entity);
+                _repository.Remove(entity);
+                return await Save();
             }
-            return null;
+            return false;
         }
 
-        public void RemoveRange(IEnumerable<T> entity)
+        public async Task<bool> RemoveRange(IEnumerable<T> entity)
         {
             _repository.RemoveRange(entity);
+            return await Save();
         }
 
-        public void Update(T entity)
+        public async Task<bool> Update(T entity)
         {
             _repository.Update(entity);
+            return await Save();
         }
         public async Task<bool> Save()
         {
-            var result = await _repository.Save();
+            int result = await _repository.Save();
             if (result > 0)
             {
                 return true;

@@ -1,14 +1,12 @@
-﻿namespace internPlatform.Infrastructure.Identity
-{
-    using internPlatform.Infrastructure.Data;
-    using internPlatform.Infrastructure.Interfaces;
-    using Microsoft.AspNet.Identity.EntityFramework;
-    using Microsoft.AspNet.Identity;
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
+﻿using internPlatform.Infrastructure.Data;
+using internPlatform.Infrastructure.Interfaces;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity.Migrations;
 
+
+namespace internPlatform.Infrastructure.Identity
+{
     internal sealed class Configuration : DbMigrationsConfiguration<internPlatform.Infrastructure.Data.ApplicationDbContext>
     {
         public Configuration()
@@ -27,10 +25,10 @@
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
-            string[] roles = { "SuperAdmin", "Admin" };
+            string[] roles = Constants.Constants.Roles;
             const string superAdminEmail = "admin@mail.com";
             const string superAdminPassword = "master";
-            
+
             const string adminEmail = "user@mail.com";
             const string adminPassword = "userPass";
 
@@ -63,7 +61,7 @@
             }
 
 
-            //Add UserAdmin accound
+            //Add Admin accound
             var adminUser = userManager.FindByName(adminEmail);
             if (adminUser == null)
             {
@@ -75,7 +73,7 @@
                 }
                 else
                 {
-                   // Console.WriteLine(result.Errors.First().ToString());
+                    // Console.WriteLine(result.Errors.First().ToString());
                 }
             }
 

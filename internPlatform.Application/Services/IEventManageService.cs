@@ -3,17 +3,15 @@ using internPlatform.Domain.Entities.DTO;
 using internPlatform.Domain.Models.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace internPlatform.Application.Services
 {
     public interface IEventManageService
     {
-        Task<Event> Get(Expression<Func<Event, bool>> filter, string includeProperties = null);
-        List<EventDTO> GetAllEvents(bool isAdmin, string userName);
+        Task<EventDTO> Get(Expression<Func<Event, bool>> filter, string includeProperties = null);
+        List<BrifEventViewModel> GetAll(bool isAdmin, string userName);
         Event Add(Event entity);
         void Update(Event entity);
         Task<EventUpSertViewModel> GetEventModel(string AuthorId, int? Id = null);

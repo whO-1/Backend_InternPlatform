@@ -1,4 +1,4 @@
-﻿@model List<internPlatform.Domain.Entities.Event>
+﻿@using internPlatform.Application.Extensions
 @{
     ViewBag.Title = "Events";
     Layout = "~/Areas/Admin/Views/Shared/_AdminMenuLayout.cshtml";
@@ -7,7 +7,7 @@
     <h2>Events &nbsp;<i class="bi bi-calendar2-event-fill h4"></i> </h2>
     <div class="container">
         <div class="row py-4">
-           
+
             <div class="col-12 text-end">
                 @Html.ActionLink("Add Event", "EventUpSert", "Dashboard", new { area = "Admin" }, new { @class = "btn btn-warning" })
             </div>
@@ -34,6 +34,5 @@
 
 }
 
-@section Scripts{
-    <script src="~/Scripts/events.js"></script>
-}
+@Url.ScriptVersioned("~/Scripts/datatables/events.js")
+

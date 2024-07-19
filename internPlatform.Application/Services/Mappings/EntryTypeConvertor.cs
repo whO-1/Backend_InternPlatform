@@ -1,6 +1,5 @@
 ﻿using internPlatform.Domain.Entities;
 using internPlatform.Domain.Entities.DTO;
-using System;
 
 namespace internPlatform.Application.Services.Mappings
 {
@@ -9,7 +8,12 @@ namespace internPlatform.Application.Services.Mappings
         public EntryTypeConvertor() { }
         public EntryType DTOToEntity(EntryTypeDTO obj)
         {
-            throw new NotImplementedException();
+            return new EntryType
+            {
+                Id = obj.Id,
+                Name = obj.Name,
+                DisplayOrder = obj.DisplayOrder,
+            };
         }
 
         public EntryTypeDTO EntityToDTO(EntryType entity)

@@ -1,11 +1,11 @@
 ﻿using internPlatform.Application.Services;
+using internPlatform.Domain.Models;
+using internPlatform.Domain.Models.ViewModels;
 using System;
 using System.Collections;
+using System.IO;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using System.IO;
-using internPlatform.Domain.Models;
-using internPlatform.Domain.Entities.DTO;
 
 namespace internPlatform.Controllers
 {
@@ -32,23 +32,25 @@ namespace internPlatform.Controllers
             }
         }
 
-        public async Task<JsonResult> Events( int Id = 0)
+        public async Task<JsonResult> Events(int Id = 0)
         {
             try
             {
                 if (Id != 0)
                 {
-                    var Event = await _apiService.GetEventById( Id );
+                    var Event = await _apiService.GetEventById(Id);
                     return Json(new { Result = "OK", Records = Event }, JsonRequestBehavior.AllowGet);
                 }
-                else{
+                else
+                {
                     string body;
-                    using (var reader = new StreamReader(Request.InputStream)) { 
-                         body = reader.ReadToEnd();
+                    using (var reader = new StreamReader(Request.InputStream))
+                    {
+                        body = reader.ReadToEnd();
                     }
 
-                    PaginatedList<EventDTO> Events = await _apiService.GetEventsPaginated(body);
-                    return Json(new { Result = "OK", Records = Events,  Events.TotalPages, Events.CurrentPage, Events.HasNextPage, Events.HasPreviousPage }, JsonRequestBehavior.AllowGet);
+                    PaginatedList<ApiEventViewModel> Events = await _apiService.GetEventsPaginated(body);
+                    return Json(new { Result = "OK", Records = Events, Events.TotalPages, Events.CurrentPage, Events.HasNextPage, Events.HasPreviousPage }, JsonRequestBehavior.AllowGet);
                 }
             }
             catch (Exception ex)

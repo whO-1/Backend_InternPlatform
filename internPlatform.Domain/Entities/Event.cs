@@ -38,12 +38,12 @@ namespace internPlatform.Domain.Entities
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-ddTHH:mm}", ApplyFormatInEditMode = true)]
         [DisplayName("Start date:")]
         [Required]
-        public DateTime? StartDate { get; set; }
+        public DateTime StartDate { get; set; }
         [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-ddTHH:mm}", ApplyFormatInEditMode = true)]
         [DisplayName("End date:")]
         [Required]
-        public DateTime? EndDate { get; set; }
+        public DateTime EndDate { get; set; }
 
 
         public TimeStamp TimeStamp { get; set; }

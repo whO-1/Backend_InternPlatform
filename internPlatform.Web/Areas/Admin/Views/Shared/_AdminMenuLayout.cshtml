@@ -1,6 +1,4 @@
-﻿@{
-
-}
+﻿@using internPlatform.Infrastructure.Constants
 
 <!DOCTYPE html>
 <html>
@@ -45,44 +43,32 @@
             <div id="nav-content">
                 @if (User.IsInRole("SuperAdmin"))
                 {
-                    <div class="nav-button d-flex flex-row align-items-center">
-                        <a href="@Url.Action("Entities", "Dashboard", new { area = "Admin" })" class="d-flex align-items-center px-2 @(ViewBag.Title == "Entities" ? "active" : "")">
-                            <i class="bi bi-boxes"></i>
-                            &nbsp;
-                            <span class="m-0 p-0">Entities</span>
-                        </a>
-                    </div>
-                    <div class="nav-button d-flex flex-row align-items-center">
-                        <a href="@Url.Action("Links", "Dashboard", new { area = "Admin" })" class="d-flex align-items-center px-2 @(ViewBag.Title == "Links" ? "active" : "")">
-                            <i class="bi bi-link-45deg"></i>
-                            &nbsp;
-                            <span class="m-0 p-0">Links</span>
-                        </a>
-                    </div>
-                    <div class="nav-button d-flex flex-row align-items-center">
-                        <a href="@Url.Action("Orders", "Dashboard", new { area = "Admin" })" class="d-flex align-items-center px-2 @(ViewBag.Title == "Orders" ? "active" : "")">
-                            <i class="bi bi-boxes"></i>
-                            &nbsp;
-                            <span class="m-0 p-0">Orders</span>
-                        </a>
-                    </div>
-                    <div class="nav-button d-flex flex-row align-items-center">
-                        <a href="@Url.Action("Users", "Dashboard", new { area = "Admin" })" class="d-flex align-items-center px-2 @(ViewBag.Title == "Users" ? "active" : "")">
-                            <i class="bi bi-people-fill"></i>
-                            &nbsp;
-                            <span class="m-0 p-0">Users</span>
-                        </a>
-                    </div>
-
-
+                    foreach (var tab in Constants.PrivateTabs)
+                    {
+                        <div class="nav-button d-flex flex-row align-items-center">
+                            <a href="@Url.Action($"{tab.Item2}", $"{tab.Item3}", new { area = $"{tab.Item4}" })" class="d-flex align-items-center px-2 @(ViewBag.Title == $"{tab.Item2}" ? "active" : "")">
+                                <i class="bi @tab.Item5 " ;></i>
+                                &nbsp;
+                                <span class="m-0 p-0">@tab.Item1</span>
+                            </a>
+                        </div>
+                    }
                 }
-                <div class="nav-button d-flex flex-row align-items-center">
-                    <a href="@Url.Action("Events", "Dashboard", new { area = "Admin" })" class="d-flex align-items-center px-2 @(ViewBag.Title == "Events" ? "active" : "")">
-                        <i class="bi bi-calendar4-event"></i>
-                        &nbsp;
-                        <span class="m-0 p-0">Events</span>
-                    </a>
-                </div>
+
+                @{
+                    foreach (var tab in Constants.PublicTabs)
+                    {
+                        <div class="nav-button d-flex flex-row align-items-center">
+                            <a href="@Url.Action($"{tab.Item2}", $"{tab.Item3}", new { area = $"{tab.Item4}" })" class="d-flex align-items-center px-2 @(ViewBag.Title == $"{tab.Item2}" ? "active" : "")">
+                                <i class="bi @tab.Item5 " ;></i>
+                                &nbsp;
+                                <span class="m-0 p-0">@tab.Item1</span>
+                            </a>
+                        </div>
+                    }
+                }
+
+
             </div>
             <input id="nav-footer-toggle" type="checkbox" />s
 

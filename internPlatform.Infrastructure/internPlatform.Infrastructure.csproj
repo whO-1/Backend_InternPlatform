@@ -81,6 +81,7 @@
   <ItemGroup>
     <Compile Include="Config\DbInitializer.cs" />
     <Compile Include="Config\IdentityConfig.cs" />
+    <Compile Include="Constants\Constants.cs" />
     <Compile Include="Data\ApplicationDbContext.cs" />
     <Compile Include="Data\ApplicationRoleManagement.cs" />
     <Compile Include="Data\ApplicationUser.cs" />
@@ -88,6 +89,14 @@
     <Compile Include="Entity\202407121012234_CreateAndSeedDB.cs" />
     <Compile Include="Entity\202407121012234_CreateAndSeedDB.Designer.cs">
       <DependentUpon>202407121012234_CreateAndSeedDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\202407181509208_EventEntityUpdate.cs" />
+    <Compile Include="Entity\202407181509208_EventEntityUpdate.Designer.cs">
+      <DependentUpon>202407181509208_EventEntityUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\202407181520447_EventEntityUpdateDate.cs" />
+    <Compile Include="Entity\202407181520447_EventEntityUpdateDate.Designer.cs">
+      <DependentUpon>202407181520447_EventEntityUpdateDate.cs</DependentUpon>
     </Compile>
     <Compile Include="Entity\Configuration.cs" />
     <Compile Include="Identity\202406201318104_UserMigration.cs" />
@@ -117,6 +126,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Entity\202407121012234_CreateAndSeedDB.resx">
       <DependentUpon>202407121012234_CreateAndSeedDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Entity\202407181509208_EventEntityUpdate.resx">
+      <DependentUpon>202407181509208_EventEntityUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Entity\202407181520447_EventEntityUpdateDate.resx">
+      <DependentUpon>202407181520447_EventEntityUpdateDate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Identity\202406201318104_UserMigration.resx">
       <DependentUpon>202406201318104_UserMigration.cs</DependentUpon>

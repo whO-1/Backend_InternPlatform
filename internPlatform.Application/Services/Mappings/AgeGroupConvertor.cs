@@ -8,9 +8,13 @@ namespace internPlatform.Application.Services.Mappings
         public AgeGroupConvertor() { }
         public AgeGroup DTOToEntity(AgeGroupDTO obj)
         {
-            throw new System.NotImplementedException();
+            return new AgeGroup
+            {
+                Id = obj.Id,
+                Name = obj.Name,
+                DisplayOrder = obj.DisplayOrder,
+            };
         }
-
         public AgeGroupDTO EntityToDTO(AgeGroup entity)
         {
             return new AgeGroupDTO

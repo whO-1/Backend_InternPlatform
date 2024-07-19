@@ -9,7 +9,7 @@ $(document).ready(function () {
             deleteAction: '/Admin/Category/DeleteEntity'
         },
         fields: {
-            CategoryId: {
+            Id: {
                 key: true,
                 list: false
             },

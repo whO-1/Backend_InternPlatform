@@ -43,18 +43,18 @@ function initialize() {
                 defaultValue: 'null'
             }
         },
-        recordAdded: async function (event, data) {
+        //recordAdded: async function (event, data) {
            
-            await destroy();
-            await initialize();
+        //    await destroy();
+        //    await initialize();
 
-        },
+        //},
 
-        recordDeleted: async function (event, data) {
+        //recordDeleted: async function (event, data) {
             
-            await  destroy();
-            await  initialize();
-        },
+        //    await  destroy();
+        //    await  initialize();
+        //},
 
     });
     $('#LinksTableContainer').jtable('load');

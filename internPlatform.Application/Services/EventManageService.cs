@@ -34,14 +34,28 @@ namespace internPlatform.Application.Services
 
 
 
-        public async Task<Event> Get(Expression<Func<Event, bool>> filter, string includeProperties = null)
+        public async Task<EventDTO> Get(Expression<Func<Event, bool>> filter, string includeProperties = null)
         {
-            return await _repository.Get(filter, includeProperties);
+            var e = await _repository.Get(filter, includeProperties);
+            return new EventDTO
+            {
+                Id = e.EventId,
+                Title = e.Title,
+                Description = e.Description,
+                SpecialGuests = e.SpecialGuests,
+                AgeGroupId = e.AgeGroupId ?? 0,
+                EntryTypeId = e.EntryTypeId ?? 0,
+                Categories = e.Categories.Select(c => c.CategoryId).ToList(),
+                AuthorId = e.AuthorId,
+                EventLocation = e.EventLocation,
+                StartDate = e.StartDate,
+                EndDate = e.EndDate,
+                TimeStamp = e.TimeStamp,
+            };
         }
-
-        public List<EventDTO> GetAllEvents(bool isSuperAdmin, string userName)
+        public List<BrifEventViewModel> GetAll(bool isSuperAdmin, string userName)
         {
-            List<EventDTO> eventDTOList = new List<EventDTO>();
+            List<BrifEventViewModel> eventDTOList = new List<BrifEventViewModel>();
             List<Event> events;
             if (isSuperAdmin)
             {
@@ -54,22 +68,23 @@ namespace internPlatform.Application.Services
 
             events.ForEach(e =>
             {
-                eventDTOList.Add(new EventDTO
+                eventDTOList.Add(new BrifEventViewModel
                 {
                     Id = e.EventId,
                     Title = e.Title,
                     Description = e.Description,
-                    Categories = e.Categories.Select(c => c.Name).ToList(),
-                    AuthorId = e.AuthorId,
                     SpecialGuests = e.SpecialGuests,
-                    //
-                    //
-
+                    AgeGroup = (e.Age != null) ? e.Age.Name : "",
+                    EntryType = (e.Entry != null) ? e.Entry.Name : "",
+                    SelectedCategories = e.Categories.Select(c => c.Name).ToList(),
+                    Author = e.AuthorId,
+                    LastUpdate = e.TimeStamp.UpdateDate,
                 });
             });
 
             return eventDTOList;
         }
+
 
         public Event Add(Event entity)
         {
@@ -125,21 +140,31 @@ namespace internPlatform.Application.Services
 
         public async Task<EventUpSertViewModel> GetEventModel(string CurrentUser, int? Id = null)
         {
-            var model = new EventUpSertViewModel();
+            EventUpSertViewModel model = new EventUpSertViewModel();
+            model.AuthorId = CurrentUser;
             if (Id != null)
             {
-                Event OldEvent = await Get(e => e.EventId == Id, includeProperties: "Entry,Age");
+                EventDTO OldEvent = await Get(e => e.EventId == Id, includeProperties: "Entry,Age");
                 if (OldEvent != null)
                 {
-                    // model.Event = OldEvent;
-                    model.SelectedCategories = OldEvent.Categories.Select(ec => ec.CategoryId).ToList();
+                    model = new EventUpSertViewModel
+                    {
+                        Id = OldEvent.Id,
+                        Title = OldEvent.Title,
+                        Description = OldEvent.Description,
+                        SpecialGuests = OldEvent.SpecialGuests,
+                        AgeGroupId = OldEvent.AgeGroupId,
+                        EntryTypeId = OldEvent.EntryTypeId,
+                        AuthorId = OldEvent.AuthorId,
+                        StartDate = OldEvent.StartDate.ToString("yyyy-MM-ddTHH:mm"),
+                        EndDate = OldEvent.EndDate.ToString("yyyy-MM-ddTHH:mm"),
+                        SelectedCategories = OldEvent.Categories,
+                        Longitude = OldEvent.EventLocation.Longitude.ToString(),
+                        Latitude = OldEvent.EventLocation.Latitude.ToString(),
+                    };
                 }
             }
-            else
-            {
-                model.Id = 0;
-                model.AuthorId = CurrentUser;
-            }
+
             PopulateWithEntities(model);
             return model;
         }
@@ -149,26 +174,19 @@ namespace internPlatform.Application.Services
         {
             entity.Categories = _repositoryCategory.GetAll().Select(c => new CategoryDTO
             {
-                CategoryId = c.CategoryId,
+                Id = c.CategoryId,
                 Name = c.Name,
                 DisplayOrder = c.DisplayOrder,
             }).ToList();
             entity.AgeGroups = _serviceAge.GetAll();
             entity.EntryTypes = _serviceEntry.GetAll();
-            entity.SelectedCategories = (entity.SelectedCategories != null) ? entity.SelectedCategories : new List<int>();
-            entity.Latitude = entity.EventLocation.Latitude.ToString();
-            entity.Longitude = entity.EventLocation.Longitude.ToString();
             return entity;
         }
+
 
         public async Task<bool> EventUpSert(EventUpSertViewModel model)
         {
 
-            if (model.Longitude != null && model.Latitude != null)
-            {
-                model.EventLocation.Longitude = double.Parse(model.Longitude, CultureInfo.InvariantCulture);
-                model.EventLocation.Latitude = double.Parse(model.Latitude, CultureInfo.InvariantCulture);
-            }
             Event getEvent = await _repository.Get(e => e.EventId == model.Id, "Categories");
             bool isNewEvent = (getEvent == null) ? true : false;
             var categories = (model.SelectedCategories != null) ? _repositoryCategory.GetAll(c => model.SelectedCategories.Contains(c.CategoryId)).ToList() : null;
@@ -179,13 +197,21 @@ namespace internPlatform.Application.Services
             getEvent.Title = model.Title;
             getEvent.Description = model.Description;
             getEvent.AuthorId = model.AuthorId;
-            getEvent.StartDate = model.StartDate;
-            getEvent.EndDate = model.EndDate;
+            getEvent.StartDate = DateTime.ParseExact(model.StartDate, "yyyy-MM-ddTHH:mm", CultureInfo.InvariantCulture);
+            getEvent.EndDate = DateTime.ParseExact(model.EndDate, "yyyy-MM-ddTHH:mm", CultureInfo.InvariantCulture);
+            getEvent.EntryTypeId = model.EntryTypeId;
             getEvent.AgeGroupId = model.AgeGroupId;
             getEvent.SpecialGuests = model.SpecialGuests;
-            getEvent.EventLocation = model.EventLocation;
+            if (model.Longitude != null)
+            {
+                getEvent.EventLocation.Longitude = double.Parse(model.Longitude, CultureInfo.InvariantCulture);
+            }
+            if (model.Latitude != null)
+            {
+                getEvent.EventLocation.Latitude = double.Parse(model.Latitude, CultureInfo.InvariantCulture);
+            }
             getEvent.Categories = categories;
-            getEvent.EntryTypeId = model.EntryTypeId;
+
 
             if (isNewEvent)
             {

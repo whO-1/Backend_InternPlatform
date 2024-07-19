@@ -3,11 +3,15 @@ async function initMap() {
     // Data import
     const long = document.getElementById("Latitude");
     const lat = document.getElementById("Longitude");
-    let longNumber = Number(long.value.replace(",", ".") );
-    let latNumber = Number(lat.value.replace(",", "."));
-   
+    let longNumber = (long.value !== '')?  Number(long.value.replace(",", ".")) : null;
+    let latNumber = (lat.value !== '') ? Number(lat.value.replace(",", ".")) : null;
+
+    //console.log("long", long.value==='' )
+    //console.log("lat", lat.value)
+    //console.log("longNumber", longNumber)
+    //console.log("latNumber", latNumber)
     //init in case of new map
-    if (isNaN(latNumber) || isNaN(longNumber) || latNumber === null || longNumber === null || (latNumber == 0 && longNumber == 0) ) {
+    if (isNaN(latNumber) || isNaN(longNumber) || latNumber === null || longNumber === null  ) {
         latNumber = 47.02;
         longNumber = 28.83;
     }

@@ -1,5 +1,4 @@
-﻿using internPlatform.Domain.Entities;
-using internPlatform.Domain.Entities.DTO;
+﻿using internPlatform.Domain.Entities.DTO;
 using System;
 using System.Collections.Generic;
 
@@ -15,16 +14,20 @@ namespace internPlatform.Domain.Models.ViewModels
         public string Title { get; set; }
         public string Description { get; set; }
         public string SpecialGuests { get; set; }
-        public virtual int AgeGroupId { get; set; }
-        public virtual int EntryTypeId { get; set; }
+        public int? AgeGroupId { get; set; }
+        public int? EntryTypeId { get; set; }
         public string AuthorId { get; set; }
-        public Location EventLocation { get; set; }
-        public DateTime? StartDate { get; set; }
-        public DateTime? EndDate { get; set; }
-        public List<int> SelectedCategories { get; set; }
+        public string StartDate { get; set; }
+        public string EndDate { get; set; }
+        public string Today { get; set; }
+        public List<int> SelectedCategories { get; set; } = new List<int>();
+        public string Longitude { get; set; } = "";
+        public string Latitude { get; set; } = "";
 
-        public string Longitude { get; set; }
-        public string Latitude { get; set; }
 
+        public EventUpSertViewModel()
+        {
+            Today = DateTime.Now.ToString("yyyy-MM-ddTHH:mm");
+        }
     }
 }

@@ -1,11 +1,9 @@
 ﻿
 using internPlatform.Application.Services;
-using internPlatform.Domain.Entities.DTO;
 using internPlatform.Domain.Models.ViewModels;
 using Microsoft.AspNet.Identity;
 using NLog;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -14,7 +12,7 @@ using System.Web.Mvc;
 namespace internPlatform.Web.Areas.Admin.Controllers
 {
     [RequireHttps]
-    [CustomAuthorize(Roles = "SuperAdmin,Admin")]
+    //[CustomAuthorize(Roles = "SuperAdmin,Admin")]
     public class DashboardController : Controller
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
@@ -44,8 +42,8 @@ namespace internPlatform.Web.Areas.Admin.Controllers
             return View();
         }
 
-        [CustomAuthorize(Roles = "SuperAdmin")]
-        public ActionResult Orders()
+        [CustomAuthorize(Roles = "SuperAdmin,Admin")]
+        public ActionResult Statistics()
         {
             return View();
         }
@@ -60,7 +58,7 @@ namespace internPlatform.Web.Areas.Admin.Controllers
         public JsonResult EventsGetAll()
         {
             Logger.Info($"All events accessed by {User.Identity.GetUserName()}");
-            List<EventDTO> eventDTOList = _eventService.GetAllEvents(User.IsInRole("SuperAdmin"), User.Identity.GetUserName());
+            var eventDTOList = _eventService.GetAll(User.IsInRole("SuperAdmin"), User.Identity.GetUserName());
             return Json(new { data = eventDTOList }, JsonRequestBehavior.AllowGet);
         }
 
@@ -108,11 +106,17 @@ namespace internPlatform.Web.Areas.Admin.Controllers
 
         }
 
+
         [CustomAuthorize(Roles = "SuperAdmin")]
-        public async Task<ActionResult> Users()
+        public ActionResult Users()
+        {
+            return View();
+        }
+        [CustomAuthorize(Roles = "SuperAdmin")]
+        public async Task<ActionResult> GetUsers()
         {
             var Users = await _userRoleService.PopulateUsersWithRoles();
-            return View(Users);
+            return Json(new { data = Users }, JsonRequestBehavior.AllowGet);
         }
 
         [CustomAuthorize(Roles = "SuperAdmin")]

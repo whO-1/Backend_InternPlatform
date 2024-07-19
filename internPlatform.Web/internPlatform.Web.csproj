@@ -2414,7 +2414,8 @@
     <Content Include="Content\navbar.css" />
     <Content Include="Scripts\dataTables.jqueryui.js" />
     <Content Include="Scripts\dataTables.js" />
-    <Content Include="Scripts\events.js" />
+    <Content Include="Scripts\datatables\users.js" />
+    <Content Include="Scripts\datatables\events.js" />
     <Content Include="Scripts\GMap.js" />
     <Content Include="Scripts\jtableEntities\jtableLinks.js" />
     <Content Include="Scripts\jtableEntities\jtableEntryType.js" />
@@ -2676,7 +2677,7 @@
     <Content Include="Areas\Admin\Views\Admin\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_AdminMenuLayout.cshtml" />
     <Content Include="Areas\Admin\Views\Dashboard\Links.cshtml" />
-    <Content Include="Areas\Admin\Views\Dashboard\Orders.cshtml" />
+    <Content Include="Areas\Admin\Views\Dashboard\Statistics.cshtml" />
     <Content Include="Areas\Admin\Views\Dashboard\Events.cshtml" />
     <Content Include="Areas\Admin\Views\Dashboard\Entities.cshtml" />
     <Content Include="Areas\Admin\Views\Dashboard\CreateEvent.cshtml" />
