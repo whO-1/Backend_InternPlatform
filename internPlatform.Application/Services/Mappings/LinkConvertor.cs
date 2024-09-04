@@ -8,26 +8,34 @@ namespace internPlatform.Application.Services.Mappings
         public LinkConvertor() { }
         public Link DTOToEntity(LinkDTO obj)
         {
-            return new Link
+            if (obj != null)
             {
-                Id = obj.Id,
-                LinkTitle = obj.LinkTitle,
-                LinkUrl = obj.LinkUrl,
-                DisplayOrder = obj.DisplayOrder,
-                HeadId = obj.HeadId,
-            };
+                return new Link
+                {
+                    Id = obj.Id,
+                    LinkTitle = obj.LinkTitle,
+                    LinkUrl = obj.LinkUrl,
+                    DisplayOrder = obj.DisplayOrder,
+                    HeadId = obj.HeadId,
+                };
+            }
+            return null;
         }
 
         public LinkDTO EntityToDTO(Link entity)
         {
-            return new LinkDTO
+            if (entity != null)
             {
-                Id = entity.Id,
-                LinkTitle = entity.LinkTitle,
-                LinkUrl = entity.LinkUrl,
-                DisplayOrder = entity.DisplayOrder,
-                HeadId = entity.HeadId,
-            };
+                return new LinkDTO
+                {
+                    Id = entity.Id,
+                    LinkTitle = entity.LinkTitle,
+                    LinkUrl = entity.LinkUrl,
+                    DisplayOrder = entity.DisplayOrder,
+                    HeadId = entity.HeadId,
+                };
+            }
+            return null;
         }
     }
 }

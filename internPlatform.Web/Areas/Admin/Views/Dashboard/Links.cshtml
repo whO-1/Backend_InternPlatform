@@ -1,8 +1,19 @@
-﻿
+﻿@using internPlatform.Application.Extensions
 @{
     ViewBag.Title = "Links";
     Layout = "~/Areas/Admin/Views/Shared/_AdminMenuLayout.cshtml";
 }
 
-<h2>Links</h2>
+<h2>Links &nbsp;<i class="bi bi-file-earmark-bar-graph-fill h4"></i></h2>
 
+<div class="container">
+    <div class="col-12">
+        <div class="grid-item" id="LinksTableContainer"></div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="~/Scripts/jtable/jquery.jtable.min.js" type="text/javascript"></script>
+}
+@Url.ScriptVersioned("~/Scripts/jtableEntities/jtableLinks.js")

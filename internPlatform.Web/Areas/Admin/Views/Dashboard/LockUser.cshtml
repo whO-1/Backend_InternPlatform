@@ -1,0 +1,47 @@
+﻿@model internPlatform.Domain.Models.ViewModels.UserLockViewModel
+@{
+    ViewBag.Title = "LockUser";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminMenuLayout.cshtml";
+}
+
+<h2>LockUser</h2>
+
+<div class="container d-flex flex-column align-items-center">
+    @using (Html.BeginForm("LockUser", "Dashboard", new { area = "Admin" }, FormMethod.Post, new { role = "form", @class = "col-12 d-flex flex-column align-items-center" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.UserId)
+    <div class=" row col-12 col-lg-7 mt-3 ">
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        <div class="row">
+            @Html.LabelFor(m => m.UserName, new { @class = "col-md-4 col-form-label" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control text-secondary", disabled = true })
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            @Html.LabelFor(m => m.EndDate)
+            <div class="col-12">
+                @Html.TextBoxFor(m => m.EndDate, new { @type = "datetime-local", @class = "form-control bg-light border-2 border-black col-12 mt-2", @min = Model.Today, @value = Model.EndDate, @required = true })
+            </div>
+        </div>
+        <div class="row mt-3">
+            @Html.LabelFor(m => m.Status)
+            <div class="col-12">
+                @Html.TextBoxFor(m => m.Status, new { @class = $"form-control text-center text-white {(Model.Status == "Active" ? "bg-success" : "bg-danger")} ", @disabled = true })
+            </div>
+        </div>
+
+        <div class="row col-12 col-lg-7 mt-5 d-flex flex-row justify-content-center align-items-center  ">
+            <div class=" mt-0 ml-0 w-auto">
+                @Html.ActionLink("Back to users", "Users", "Dashboard", new { @class = "btn text-muted " })
+            </div>
+            <div class=" w-auto  m-0">
+                <button type="submit" class="btn btn-outline-warning"> @(Model.Status == "Locked" ? "UnLock" : "Lock" ) </button>
+            </div>
+
+        </div>
+    </div>
+    }
+</div>

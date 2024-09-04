@@ -10,7 +10,7 @@ namespace internPlatform.Application.Services.Mappings
         {
             return new AgeGroup
             {
-                Id = obj.Id,
+                AgeGroupId = obj.Id,
                 Name = obj.Name,
                 DisplayOrder = obj.DisplayOrder,
             };
@@ -19,7 +19,7 @@ namespace internPlatform.Application.Services.Mappings
         {
             return new AgeGroupDTO
             {
-                Id = entity.Id,
+                Id = entity.AgeGroupId,
                 Name = entity.Name,
                 DisplayOrder = entity.DisplayOrder,
             };

@@ -6,6 +6,8 @@ using System.Web.Mvc;
 
 namespace internPlatform.Web.Areas.Admin.Controllers.JTableControllers
 {
+    [RequireHttps]
+    [CustomAuthorize(Roles = "SuperAdmin,Admin")]
     public class GenericController<T, T_DTO> : Controller
         where T : class
         where T_DTO : class

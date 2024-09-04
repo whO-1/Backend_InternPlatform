@@ -19,17 +19,9 @@
                 <div class="row">
                     <h1>Dashboard</h1>
                 </div>
-                <div class="row">
-                    <div class="container btn-group col-6 ">
-                        @Html.ActionLink("User", "Index", "User", new { area = "User" }, new { @class = "btn btn-primary" })
-                        <span class="px-2"></span>
-                        @Html.ActionLink("Admin", "Index", "Admin", new { area = "Admin" }, new { @class = "btn btn-dark" })
-                    </div>
-                </div>
+                
                 <div class="row mt-5 align-text-top">
-                    <h5 class="text-decoration-none">
-                        You are logged as <span>admin</span>
-                    </h5>
+                   
                     @Html.ActionLink("Back to Home", "Index", "Home", new { area = "" }, new { @class = "text btn text-muted w-auto text-decoration-underline p-2" })
                 </div>
             </div>

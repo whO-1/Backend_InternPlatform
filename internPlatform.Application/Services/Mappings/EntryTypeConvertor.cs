@@ -10,7 +10,7 @@ namespace internPlatform.Application.Services.Mappings
         {
             return new EntryType
             {
-                Id = obj.Id,
+                EntryTypeId = obj.Id,
                 Name = obj.Name,
                 DisplayOrder = obj.DisplayOrder,
             };
@@ -20,7 +20,7 @@ namespace internPlatform.Application.Services.Mappings
         {
             return new EntryTypeDTO
             {
-                Id = entity.Id,
+                Id = entity.EntryTypeId,
                 Name = entity.Name,
                 DisplayOrder = entity.DisplayOrder,
             };

@@ -8,7 +8,7 @@
         <div id="nav-footer-heading">
             <div id="nav-footer-avatar"><img src="https://gravatar.com/avatar/4474ca42d303761c2901fa819c4f2547" /></div>
             <div id="nav-footer-titlebox">
-                <a id="nav-footer-title" href="/manage/index" target="_blank">@User.Identity.GetUserName()</a>
+                <a id="nav-footer-title" href="/manage/index" target="_blank"> @( (User.Identity.GetUserName().Length > 13)? User.Identity.GetUserName().Substring(0, 13) + "..." : User.Identity.GetUserName())  </a>
                 <span id="nav-footer-subtitle"> @(User.IsInRole("SuperAdmin")? "SuperAdmin":"Admin") </span>
             </div>
             <label for="nav-footer-toggle"><i class="bi bi-caret-up-fill"></i></label>

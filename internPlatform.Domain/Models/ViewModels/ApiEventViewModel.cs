@@ -16,6 +16,7 @@ namespace internPlatform.Domain.Models.ViewModels
         public string EntryTypeName { get; set; }
         public string Author { get; set; }
         public List<string> SelectedCategories { get; set; } = new List<string>();
+        public List<int> EventImages { get; set; }
         public Location EventLocation { get; set; }
         public TimeStamp TimeStamp { get; set; }
         public DateTime StartDate { get; set; }

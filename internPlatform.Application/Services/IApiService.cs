@@ -9,8 +9,9 @@ namespace internPlatform.Application.Services
     public interface IApiService
     {
         List<LinkDTO> GetLinks();
-        //List<EventDTO> GetEvents();
         Task<ApiEventViewModel> GetEventById(int Id);
-        Task<PaginatedList<ApiEventViewModel>> GetEventsPaginated(string body);
+        Task<PaginatedList<ApiEventViewModel>> GetEventsPaginated(string body, string search = "", string filter = "");
+        List<FaqDTO> GetFaqs();
+        Task<string> GetImage(int Id);
     }
 }

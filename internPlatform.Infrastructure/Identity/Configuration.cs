@@ -26,11 +26,11 @@ namespace internPlatform.Infrastructure.Identity
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
             string[] roles = Constants.Constants.Roles;
-            const string superAdminEmail = "admin@mail.com";
-            const string superAdminPassword = "master";
+            string superAdminEmail = Constants.Constants.SuperAdminEmail;
+            string superAdminPassword = Constants.Constants.SuperAdminPassword;
 
-            const string adminEmail = "user@mail.com";
-            const string adminPassword = "userPass";
+            string adminEmail = Constants.Constants.AdminEmail;
+            string adminPassword = Constants.Constants.AdminPassword;
 
             //Add Roles
             foreach (var role in roles)

@@ -1,0 +1,50 @@
+﻿@model internPlatform.Domain.Models.ViewModels.ErrorViewModel
+@{
+    ViewBag.Title = "ErrorView";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminMenuLayout.cshtml";
+}
+
+<h2>Error Preview</h2>
+
+<div class="container  p-4  rounded text-light" style="background-color: #3e4857 ">
+    <div class="">
+        <h6><b style="font-size: 16px" class="text-white">Location:</b> &nbsp;&nbsp;@Model.CallSite</h6>
+        <p></p>
+    </div>
+    <div class="">
+        <h6><b style="font-size: 16px" class="text-white">Message:</b> &nbsp;&nbsp;@Model.Message</h6>
+        <p></p>
+    </div>
+    <div class="">
+        <h6><b style="font-size: 16px" class="text-white">Type:</b> &nbsp;&nbsp;@Model.Level</h6>
+        <p></p>
+    </div>
+    <div class="">
+        <h6><b style="font-size: 16px" class="text-white">Line Number:</b> &nbsp;&nbsp;@Model.LineNumber</h6>
+        <p></p>
+    </div>
+    <div class="">
+        <h6><b style="font-size: 16px" class="text-white">Time Stamp:</b> &nbsp;&nbsp;@Model.Timestamp</h6>
+        <p></p>
+    </div>
+    <div class="">
+        <h6><b style="font-size: 16px" class="text-white">Logger:</b> &nbsp;&nbsp;@Model.Logger</h6>
+        <p></p>
+    </div>
+    <div class="mt-4">
+        <h6 style="letter-spacing:1px; font-size:16px"> <b>Error:</b></h6>
+        <div class="alert p-4 bg-light d-flex flex-row justify-content-center " >
+            <div class="">
+                <p id="errorMessage" style="color: #383838; ">@Model.Exception</p>
+            </div>
+            
+        </div>
+    </div>
+
+
+</div>
+
+<div class="container d-flex flex-row justify-content-center gap-3 mt-4">
+    <a href="/Admin/Dashboard/ErrorsStatistics" class="btn btn-outline-dark">Back to error list</a>
+    <a class="btn btn-danger">Delete</a>
+</div>

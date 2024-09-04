@@ -69,7 +69,7 @@ namespace internPlatform.Infrastructure.Repository
             }
             return null;
         }
-        public IEnumerable<T> GetAll(Expression<Func<T, bool>> filter = null, string includeProperties = null)
+        public IQueryable<T> GetAll(Expression<Func<T, bool>> filter = null, string includeProperties = null)
         {
             IQueryable<T> query = dbSet;
             if (filter != null)
@@ -86,16 +86,13 @@ namespace internPlatform.Infrastructure.Repository
             }
             return query;
         }
-        public async Task<PaginatedList<T>> GetPaginatedAsync(PaginationOptions options, Expression<Func<T, int>> orderBy)
+        public async Task<PaginatedList<T>> GetPaginatedAsync(IQueryable<T> query, PaginationOptions options)
         {
-            IQueryable<T> query = dbSet;
             int count = await query.CountAsync();
 
-            List<T> items = (count < options.PageSize) ?
-                        await query.ToListAsync()
-                            :
-                                await query.OrderBy(orderBy).Skip((options.CurrentPage - 1) * options.PageSize).Take(options.PageSize).ToListAsync();
-
+            List<T> items = await query.Skip((options.CurrentPage - 1) * options.PageSize)
+                                       .Take(options.PageSize)
+                                       .ToListAsync();
 
             return new PaginatedList<T>(items, count, options.CurrentPage, options.PageSize);
         }

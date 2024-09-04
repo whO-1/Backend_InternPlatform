@@ -1,16 +1,17 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
+﻿
+using internPlatform.Domain.Entities;
 using internPlatform.Domain.Models.ViewModels;
 using internPlatform.Infrastructure.Data;
 using internPlatform.Infrastructure.Interfaces;
+using internPlatform.Infrastructure.Repository.IRepository;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
 
 namespace internPlatform.Web.Controllers
 {
@@ -20,14 +21,17 @@ namespace internPlatform.Web.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private ApplicationRoleManagement _userRoleManager;
-        public AccountController()
+        private readonly IRepository<User> _userRepository;
+        public AccountController(IRepository<User> userRepository)
         {
+            _userRepository = userRepository;
         }
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, ApplicationRoleManagement userRoleManager)
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, ApplicationRoleManagement userRoleManager, IRepository<User> userRepository)
         {
             UserManager = userManager;
             SignInManager = signInManager;
             UserRoleManager = userRoleManager;
+            _userRepository = userRepository;
         }
 
         public ApplicationSignInManager SignInManager
@@ -36,9 +40,9 @@ namespace internPlatform.Web.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -95,6 +99,11 @@ namespace internPlatform.Web.Controllers
                     ViewBag.errorMessage = "You must have a confirmed email to log on.";
                     return View("Error");
                 }
+                var res = await UserManager.IsLockedOutAsync(user.Id);
+                if (res)
+                {
+                    return View("Lockout");
+                }
             }
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
@@ -143,7 +152,7 @@ namespace internPlatform.Web.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -175,10 +184,19 @@ namespace internPlatform.Web.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync( user, model.Password);
+                var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await UserManager.AddToRoleAsync(user.Id, "Admin");
+                    await UserManager.AddToRoleAsync(user.Id, Infrastructure.Constants.Constants.Roles[1]);
+                    _userRepository.Add(new User
+                    {
+                        UserId = user.Id,
+                        Email = model.Email,
+                        Events = new List<Event>(),
+                        Name = "Admin",
+                        TimeStamp = new TimeStamp(),
+                        IsDeleted = false
+                    });
                     //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?Id=320771
@@ -186,8 +204,8 @@ namespace internPlatform.Web.Controllers
                     //string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     //try
                     //{
-                        string callbackUrl = await SendEmailConfirmationTokenAsync(user.Id, "Confirm your account");
-                        //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    string callbackUrl = await SendEmailConfirmationTokenAsync(user.Id, "Confirm your account");
+                    //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
                     //}
                     //catch (Exception ex)
                     //{

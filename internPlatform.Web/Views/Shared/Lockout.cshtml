@@ -4,9 +4,19 @@
     ViewBag.Title = "Locked Out";
 }
 
-<main>
-    <hgroup>
+<main class="p-md-5 p-0 m-0 ">
+    <hgroup class="p-2">
         <h1 class="text-danger">Locked out.</h1>
-        <h2 class="text-danger">This account has been locked out, please try again later.</h2>
+        <h4 class="text-danger">This account has been locked out, please try again later.</h4>
     </hgroup>
+    <div class="col-12  d-flex flex-row justify-content-center ">
+        <div class="col-12 col-lg-4  d-flex flex-row justify-content-center ">
+            <iframe id="game-container" src="https://gabrielecirulli.github.io/2048/" sandbox="allow-scripts allow-same-origin" class="col-12" style="height: 700px;"></iframe>
+        </div>
+    </div>
+
 </main>
+
+@section Scripts{
+    
+}

@@ -1,0 +1,17 @@
+﻿
+.logo-img{
+    transition-duration:0.5s;
+}
+.logo-img:hover {
+    transform: scale(1.2,1.2)
+}
+.help-text {
+    font-size: 14px;
+}
+.help-text::placeholder {
+    font-size: 14px;
+}
+
+#Email-error {
+    font-size: 14px;
+}

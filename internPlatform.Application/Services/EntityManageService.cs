@@ -20,13 +20,13 @@ namespace internPlatform.Application.Services
             _mapper = mapper;
         }
 
-        public async Task<T_DTO> Get(Expression<Func<T, bool>> filter, string includeProperties = null)
+        virtual public async Task<T_DTO> Get(Expression<Func<T, bool>> filter, string includeProperties = null)
         {
             T entity = await _repository.Get(filter, includeProperties);
             return _mapper.EntityToDTO(entity);
         }
 
-        public IEnumerable<T_DTO> GetAll(Expression<Func<T, bool>> filter = null, string includeProperties = null)
+        virtual public IEnumerable<T_DTO> GetAll(Expression<Func<T, bool>> filter = null, string includeProperties = null)
         {
             List<T_DTO> DTOentities = new List<T_DTO>();
             IEnumerable<T> entities = _repository.GetAll(filter, includeProperties);
@@ -37,7 +37,7 @@ namespace internPlatform.Application.Services
             return DTOentities;
         }
 
-        public async Task<T_DTO> Add(T_DTO entityDTO)
+        virtual public async Task<T_DTO> Add(T_DTO entityDTO)
         {
             T entity = _mapper.DTOToEntity(entityDTO);
             var result = _repository.Add(entity);
@@ -45,7 +45,7 @@ namespace internPlatform.Application.Services
             return _mapper.EntityToDTO(result);
         }
 
-        public async Task<bool> Remove(int Id)
+        virtual public async Task<bool> Remove(int Id)
         {
             T entity = await _repository.GetById(Id);
             if (entity != null)
@@ -56,7 +56,7 @@ namespace internPlatform.Application.Services
             return false;
         }
 
-        public async Task<bool> Remove(Expression<Func<T, bool>> filter, string includeProperties = null)
+        virtual public async Task<bool> Remove(Expression<Func<T, bool>> filter, string includeProperties = null)
         {
             T entity = await _repository.Get(filter, includeProperties);
             if (entity != null)
@@ -67,18 +67,18 @@ namespace internPlatform.Application.Services
             return false;
         }
 
-        public async Task<bool> RemoveRange(IEnumerable<T> entity)
+        virtual public async Task<bool> RemoveRange(IEnumerable<T> entity)
         {
             _repository.RemoveRange(entity);
             return await Save();
         }
 
-        public async Task<bool> Update(T entity)
+        virtual public async Task<bool> Update(T entity)
         {
             _repository.Update(entity);
             return await Save();
         }
-        public async Task<bool> Save()
+        virtual public async Task<bool> Save()
         {
             int result = await _repository.Save();
             if (result > 0)

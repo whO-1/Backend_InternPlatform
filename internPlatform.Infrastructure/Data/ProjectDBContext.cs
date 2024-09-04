@@ -1,8 +1,5 @@
-﻿using System.Data.Entity;
-using System.Data.Entity.Core.Metadata.Edm;
-using System.Reflection.Emit;
-using internPlatform.Domain.Entities;
-using Microsoft.Owin.BuilderProperties;
+﻿using internPlatform.Domain.Entities;
+using System.Data.Entity;
 
 namespace internPlatform.Infrastructure.Data
 {
@@ -19,10 +16,20 @@ namespace internPlatform.Infrastructure.Data
         public DbSet<AgeGroup> AgeGroups { get; set; }
         public DbSet<EntryType> EntryTypes { get; set; }
         public DbSet<Link> Links { get; set; }
-
+        public DbSet<User> Users { get; set; }
+        public DbSet<Image> Images { get; set; }
         public DbSet<Event> Events { get; set; }
+        public DbSet<Faq> Faqs { get; set; }
+        public DbSet<ErrorLog> ErrorLogs { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Faq>()
+                .HasKey(e => e.FaqId);
+
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.Events)
+                .WithRequired(e => e.User);
+
             modelBuilder.Entity<Link>()
                 .HasKey(l => l.Id);
 
@@ -52,9 +59,14 @@ namespace internPlatform.Infrastructure.Data
                 .HasMany(e => e.Categories)
                 .WithMany(e => e.Events);
 
+            modelBuilder.Entity<Event>()
+                .HasMany(e => e.Images)
+                .WithOptional(e => e.Event);
+
 
             modelBuilder.ComplexType<Location>();
             modelBuilder.ComplexType<TimeStamp>();
+
 
             base.OnModelCreating(modelBuilder);
         }

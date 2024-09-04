@@ -13,6 +13,8 @@ let dataTable;
 
 function loadDataTable() {
     dataTable = $('#tblData').DataTable({
+        "serverSide": true,
+        "processing": true,
         "ajax": { url: '/Admin/Dashboard/GetUsers' },
         "columns": [
             
@@ -28,6 +30,9 @@ function loadDataTable() {
                             </a>
                             <a onclick = "Delete('/Admin/Dashboard/DeleteUser/${data}')" class="btn text-danger" >
                                 Delete
+                            </a>
+                            <a href = "/Admin/Dashboard/LockUser/${data}" class="btn text-warning" >
+                                Lock
                             </a>
                         </div>
                         `);

@@ -21,10 +21,12 @@ namespace internPlatform.Domain.Models.ViewModels
         public string EndDate { get; set; }
         public string Today { get; set; }
         public List<int> SelectedCategories { get; set; } = new List<int>();
-        public string Longitude { get; set; } = "";
-        public string Latitude { get; set; } = "";
-
-
+        public string Longitude { get; set; } = string.Empty;
+        public string Latitude { get; set; } = string.Empty;
+        public string InputImages { get; set; }
+        public List<FileViewModel> StoredImages { get; set; }
+        public string StoredImagesIds { get; set; }
+        public string MainImageId { get; set; }
         public EventUpSertViewModel()
         {
             Today = DateTime.Now.ToString("yyyy-MM-ddTHH:mm");

@@ -12,14 +12,12 @@
     <div class="container d-flex flex-column align-items-center">
         @using (Html.BeginForm("UpdateUser", "Dashboard", new { area = "Admin" }, FormMethod.Post, new { role = "form", @class = "col-12 d-flex flex-column align-items-center" }))
         {
+           
+            @Html.AntiForgeryToken()
             <input value="@Model.User.User.Id" id="User_User_Id" name="User.User.Id" title="" hidden />
             <input value="@Model.User.Role" id="User_Role" name="User.Role" hidden />
             <input value="@Model.User.User.UserName" id="User_User_UserName" name="User.User.UserName" hidden />
-
-            <div class=" row col-12 col-lg-7 mt-3 ">
-                @Html.AntiForgeryToken()
-
-            </div>
+         
             <div class=" row col-12 col-lg-7 mt-3 ">
                 @Html.ValidationSummary("", new { @class = "text-danger" })
                 <div class="row">

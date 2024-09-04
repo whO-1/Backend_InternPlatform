@@ -1,15 +1,15 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
+using Newtonsoft.Json;
+using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using Newtonsoft.Json;
 using System.Text;
+using System.Threading.Tasks;
 namespace internPlatform.Infrastructure.Config
 {
     public class EmailService : IIdentityMessageService
     {
-        private readonly string mailerSendApiKey = "mlsn.a52a043458519db22cd7e737ea31a9aeee14bd3b6090a5b3e82c5ea83fa4b084";
+        private readonly string mailerSendApiKey = "mlsn.426938e9a4f6e2d3ae1c4b33d64ea7c01c11f67bba1fcaba1ef9f28ee98c0938";
         private readonly HttpClient httpClient;
 
         public EmailService()
@@ -30,7 +30,7 @@ namespace internPlatform.Infrastructure.Config
         {
             var emailData = new
             {
-                from = new { email = "MS_noFwrb@trial-v69oxl5o97rg785k.mlsender.net", name = "Office" },
+                from = new { email = "MS_noFwrb@trial-neqvygmyodzg0p7w.mlsender.net", name = "EventPlanner" },
                 to = new[] { new { email = message.Destination, name = "Recipient Name" } },
                 subject = message.Subject,
                 text = message.Body,
@@ -70,5 +70,5 @@ namespace internPlatform.Infrastructure.Config
     }
 
     // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
-    
+
 }

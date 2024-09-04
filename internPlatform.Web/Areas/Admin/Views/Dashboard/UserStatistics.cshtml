@@ -1,0 +1,363 @@
+﻿@using internPlatform.Application.Extensions
+@{
+    ViewBag.Title = "UserStatistics";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminMenuLayout.cshtml";
+}
+
+<h2>Statistics <i class="bi bi-bar-chart-line-fill h4"></i></h2>
+<div class="container mt-4">
+    <section class="pb-3 pb-md-4 pb-xl-5 ">
+        <div class="container">
+            <div class="row " style="height:70vh">
+                <div class="col-12 col-lg-6  col-xxl-3 h-100">
+                    <!-- Timeline 8 - Bootstrap Brain Component -->
+                    <div class="card widget-card bsb-timeline-8 border-light shadow-sm h-100" >
+                        <div class="card-body p-4 h-100" >
+                            <h5 class="card-title widget-card-title mb-3">Recent Posts</h5>
+
+                            <ul class="timeline" id="headRecentPosts">
+                                <li class="timeline-item">
+                                    <div class="timeline-body">
+                                        <div class="timeline-meta">
+                                            <span style="font-size:14px" id="statisticRecentPosted_TimeFromCreation_0"></span>
+                                        </div>
+                                        <div class="timeline-content timeline-indicator">
+                                            <h6 class="mb-1" id="statisticRecentPosted_PostTitle_0"></h6>
+                                            <span class="text-secondary fs-7" id="statisticRecentPosted_StartDate_0"></span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="timeline-item">
+                                    <div class="timeline-body">
+                                        <div class="timeline-meta">
+                                            <span style="font-size:14px" id="statisticRecentPosted_TimeFromCreation_1"></span>
+                                        </div>
+                                        <div class="timeline-content timeline-indicator">
+                                            <h6 class="mb-1" id="statisticRecentPosted_PostTitle_1"></h6>
+                                            <span class="text-secondary fs-7" id="statisticRecentPosted_StartDate_1"></span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="timeline-item">
+                                    <div class="timeline-body">
+                                        <div class="timeline-meta">
+                                            <span style="font-size:14px" id="statisticRecentPosted_TimeFromCreation_2"></span>
+                                        </div>
+                                        <div class="timeline-content timeline-indicator">
+                                            <h6 class="mb-1" id="statisticRecentPosted_PostTitle_2"></h6>
+                                            <span class="text-secondary fs-7" id="statisticRecentPosted_StartDate_2"></span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 col-xxl-9 h-100">
+                    <!-- Map 2 - Bootstrap Brain Component -->
+                    <div class="card widget-card border-light shadow-sm h-100">
+                        <div class="card-body p-4 bg-primary h-100">
+                            <div class="d-block d-sm-flex align-items-center justify-content-between mb-3 ">
+                                <div class="mb-2 mb-sm-0 ">
+                                    <h5 class="card-title widget-card-title m-0 text-light">Posted Events Overview</h5>
+                                </div>
+                                <div>
+                                    <span class="text-secondary fs-7">Last updated: 7 days ago</span>
+                                </div>
+                            </div>
+                            <div id="bsb-map-2" class="bsb-jvm-zoom-btn" style="height:90%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pb-3 pb-md-4 pb-xl-5 ">
+        <div class="container">
+            <div class="row gy-3 gy-md-4">
+                <div class="col-12 col-lg-6 col-xl-7">
+                    <!-- Chart 3 - Bootstrap Brain Component -->
+                    <div class="card widget-card border-light shadow-sm h-100">
+                        <div class="card-body p-4">
+                            <h5 class="card-title widget-card-title mb-3">Popularity Stats</h5>
+                            <div id="bsb-chart-3"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 col-xl-5">
+                    <!-- Card 2 - Bootstrap Brain Component -->
+                    <div class="card widget-card border-light shadow-sm h-100">
+                        <div class="card-body p-4">
+                            <h5 class="card-title widget-card-title mb-4">Activity Overview</h5>
+                            <div class="row gy-4">
+                                <div class="col-12">
+                                    <div class="row align-items-center">
+                                        <div class="col-8">
+                                            <div class="d-flex align-items-center">
+                                                <div>
+                                                    <div class="fs-5 bsb-w-50 bsb-h-50 bg-primary-subtle text-primary rounded-2 d-flex align-items-center justify-content-center me-3">
+                                                        <i class="bi bi-check-circle-fill"></i>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <h6 class="m-0">Active</h6>
+                                                    <p class="text-secondary m-0 fs-7">Available posts</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <h6 class="text-end" id="statisticActivePosts_Total_0">32</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row align-items-center">
+                                        <div class="col-8">
+                                            <div class="d-flex align-items-center">
+                                                <div>
+                                                    <div class="fs-5 bsb-w-50 bsb-h-50 bg-primary-subtle text-primary rounded-2 d-flex align-items-center justify-content-center me-3">
+                                                        <i class="bi bi-calendar-check-fill"></i>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <h6 class="m-0">Today</h6>
+                                                    <p class="text-secondary m-0 fs-7">Events set for today</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <h6 class="text-end" id="statisticTodayPosts_Total_1">5</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row align-items-center">
+                                        <div class="col-8">
+                                            <div class="d-flex align-items-center">
+                                                <div>
+                                                    <div class="fs-5 bsb-w-50 bsb-h-50 bg-primary-subtle text-primary rounded-2 d-flex align-items-center justify-content-center me-3">
+                                                        <i class="bi bi-heart-fill"></i>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <h6 class="m-0">Total Likes</h6>
+                                                    <p class="text-secondary m-0 fs-7">Likes per all posts</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <h6 class="text-end" id="statisticTotalLikes_Total_2">109</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row align-items-center">
+                                        <div class="col-8">
+                                            <div class="d-flex align-items-center">
+                                                <div>
+                                                    <div class="fs-5 bsb-w-50 bsb-h-50 bg-primary-subtle text-primary rounded-2 d-flex align-items-center justify-content-center me-3">
+                                                        <i class="bi bi-binoculars-fill"></i>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <h6 class="m-0">Total views</h6>
+                                                    <p class="text-secondary m-0 fs-7">Most views per post</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <h6 class="text-end" id="statisticTotalViews_Total_3">2,432</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row align-items-center">
+                                        <div class="col-8">
+                                            <div class="d-flex align-items-center">
+                                                <div>
+                                                    <div class="fs-5 bsb-w-50 bsb-h-50 bg-primary-subtle text-primary rounded-2 d-flex align-items-center justify-content-center me-3">
+                                                        <i class="bi bi-stop-circle-fill"></i>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <h6 class="m-0">Blocked</h6>
+                                                    <p class="text-secondary m-0 fs-7">Banned Posts</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <h6 class="text-end" id="statisticBlockedPosts_Total_4">150</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row align-items-center">
+                                        <div class="col-8">
+                                            <div class="d-flex align-items-center">
+                                                <div>
+                                                    <div class="fs-5 bsb-w-50 bsb-h-50 bg-primary-subtle text-primary rounded-2 d-flex align-items-center justify-content-center me-3">
+                                                        <i class="bi bi-opencollective"></i>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <h6 class="m-0">Total</h6>
+                                                    <p class="text-secondary m-0 fs-7">Created posts for all time</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <h6 class="text-end" id="statisticTotalPosts_Total_5">289</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pb-3 pb-md-4 pb-xl-5 ">
+        <div class="container">
+            <div class="row gy-3 gy-md-4">
+                <!--<div class="col-12 col-lg-6 col-xl-5">-->
+                <!-- Calendar 1 - Bootstrap Brain Component -->
+                <!--<div class="card widget-card border-light shadow-sm h-100">
+                        <div class="card-body p-4">
+                            <div id="bsb-calendar-1" class="fc fc-media-screen fc-direction-ltr fc-theme-bootstrap5 bsb-calendar-theme"></div>
+                        </div>
+                    </div>
+                </div>-->
+                <div class="col-12 ">
+                    <!-- Table 1 - Bootstrap Brain Component -->
+                    <div class="card widget-card border-light shadow-sm h-100">
+                        <div class="card-body p-4">
+                            <h5 class="card-title widget-card-title mb-4">Top Posts</h5>
+                            <div class="table-responsive">
+                                <table class="table table-borderless bsb-table-xl text-nowrap align-middle m-0" id="headTopPosts">
+                                    <thead>
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Category</th>
+                                            <th>Entry Type</th>
+                                            <th>Likes</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <h6 class="mb-1" id="statisticTopPosts_PostTitle_0"></h6>
+                                                <span class="text-secondary fs-7"></span>
+                                            </td>
+                                            <td>
+                                                <h6 class="mb-1" id="statisticTopPosts_Categories_0"></h6>
+                                                <span class="text-secondary fs-7" id="statisticTopPosts_AgeType_0"></span>
+                                            </td>
+                                            <td>
+                                                <h6 class="mb-1" id="statisticTopPosts_EntryType_0"></h6>
+                                                <span class="text-secondary fs-7" id="statisticTopPosts_Views_0"></span>
+                                            </td>
+                                            <td id="statisticTopPosts_Likes_0"></td>
+                                            <td>
+                                                <span class="badge rounded-pill " id="statisticTopPosts_Status_0"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <h6 class="mb-1" id="statisticTopPosts_PostTitle_1"></h6>
+                                                <span class="text-secondary fs-7"></span>
+                                            </td>
+                                            <td>
+                                                <h6 class="mb-1" id="statisticTopPosts_Categories_1">Politics</h6>
+                                                <span class="text-secondary fs-7" id="statisticTopPosts_AgeType_1"></span>
+                                            </td>
+                                            <td>
+                                                <h6 class="mb-1" id="statisticTopPosts_EntryType_1"></h6>
+                                                <span class="text-secondary fs-7" id="statisticTopPosts_Views_1"></span>
+                                            </td>
+                                            <td id="statisticTopPosts_Likes_1"></td>
+                                            <td>
+                                                <span class="badge rounded-pill " id="statisticTopPosts_Status_1"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <h6 class="mb-1" id="statisticTopPosts_PostTitle_2"></h6>
+                                                <span class="text-secondary fs-7"></span>
+                                            </td>
+                                            <td>
+                                                <h6 class="mb-1" id="statisticTopPosts_Categories_2">Politics</h6>
+                                                <span class="text-secondary fs-7" id="statisticTopPosts_AgeType_2"></span>
+                                            </td>
+                                            <td>
+                                                <h6 class="mb-1" id="statisticTopPosts_EntryType_2"></h6>
+                                                <span class="text-secondary fs-7" id="statisticTopPosts_Views_2"></span>
+                                            </td>
+                                            <td id="statisticTopPosts_Likes_2"></td>
+                                            <td>
+                                                <span class="badge rounded-pill " id="statisticTopPosts_Status_2"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <h6 class="mb-1" id="statisticTopPosts_PostTitle_3"></h6>
+                                                <span class="text-secondary fs-7"></span>
+                                            </td>
+                                            <td>
+                                                <h6 class="mb-1" id="statisticTopPosts_Categories_3"></h6>
+                                                <span class="text-secondary fs-7" id="statisticTopPosts_AgeType_3"></span>
+                                            </td>
+                                            <td>
+                                                <h6 class="mb-1" id="statisticTopPosts_EntryType_3"></h6>
+                                                <span class="text-secondary fs-7" id="statisticTopPosts_Views_3"></span>
+                                            </td>
+                                            <td id="statisticTopPosts_Likes_3"></td>
+                                            <td>
+                                                <span class="badge rounded-pill " id="statisticTopPosts_Status_3"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <h6 class="mb-1" id="statisticTopPosts_PostTitle_4"></h6>
+                                                <span class="text-secondary fs-7"></span>
+                                            </td>
+                                            <td>
+                                                <h6 class="mb-1" id="statisticTopPosts_Categories_3"></h6>
+                                                <span class="text-secondary fs-7" id="statisticTopPosts_AgeType_4"></span>
+                                            </td>
+                                            <td>
+                                                <h6 class="mb-1" id="statisticTopPosts_EntryType_4"></h6>
+                                                <span class="text-secondary fs-7" id="statisticTopPosts_Views_4"></span>
+                                            </td>
+                                            <td id="statisticTopPosts_Likes_4"></td>
+                                            <td>
+                                                <span class="badge rounded-pill " id="statisticTopPosts_Status_4"></span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+@section Scripts{
+    <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.4/tutorials/timelines/timeline-8/assets/css/timeline-8.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsvectormap/dist/css/jsvectormap.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/jsvectormap"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsvectormap/dist/maps/world.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsvectormap/dist/maps/world-merc.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+}
+
+@Url.ScriptVersioned("~/Scripts/ChartJS/MultiBarChart.js")
+@Url.ScriptVersioned("~/Scripts/ChartJS/Map.js")
+@Url.ScriptVersioned("~/Scripts/ChartJS/RecentPostsChart.js")

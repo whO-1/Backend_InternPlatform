@@ -6,28 +6,34 @@
 
 <h2>Entities &nbsp;<i class="bi bi-file-earmark-bar-graph-fill h4"></i></h2>
 
-<div class="row mt-4">
-    <div class="col">
-        <div class="grid-item" id="CategoryTableContainer"></div>
+<div class="container d-flex flex-column align-items-end gap-4">
+    <div class="row col-12">
+        <div class="col">
+            <div class="grid-item" id="CategoryTableContainer"></div>
+        </div>
+        <div class="col">
+            <div class="grid-item" id="AgeGroupTableContainer"></div>
+        </div>
     </div>
-    <div class="col">
-        <div class="grid-item" id="AgeGroupTableContainer"></div>
+
+    <div class="row col-12">
+        <div class="col">
+            <div class="grid-item" id="EntryTypeTableContainer"></div>
+        </div>
+        <div class="col">
+            <div class="grid-item" id="FaqTableContainer"></div>
+        </div>
     </div>
 </div>
 
-<div class="row mt-4">
-    <div class="col">
-        <div class="grid-item" id="EntryTypeTableContainer"></div>
-    </div>
-    <div class="col">
-        <div class="grid-item" id="LinksTableContainer"></div>
-    </div>
-</div>
 
+@section Scripts{
+    <script src="~/Scripts/jtable/jquery.jtable.min.js" type="text/javascript"></script>
+}
 
 @Url.ScriptVersioned("~/Scripts/jtableEntities/jtableCategory.js")
 @Url.ScriptVersioned("~/Scripts/jtableEntities/jtableAgeGroup.js")
 @Url.ScriptVersioned("~/Scripts/jtableEntities/jtableEntryType.js")
-@Url.ScriptVersioned("~/Scripts/jtableEntities/jtableLinks.js")
+@Url.ScriptVersioned("~/Scripts/jtableEntities/jtableFaq.js")
 
 

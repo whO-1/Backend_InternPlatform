@@ -19,7 +19,6 @@ function navButtonEnter(allElements, element, i, l) {
     if (i > 0) {
         allElements[i - 1].classList.add(poinClassPrev);
     }
-    console.log("Change element");
 }
 
 function removeAllPointers(allElements) {

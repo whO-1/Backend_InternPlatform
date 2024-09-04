@@ -3,12 +3,34 @@
 }
 
 <main>
-    <section class="row" aria-labelledby="aspnetTitle">
-
-        <h1 id="title"><i class="bi bi-house"></i> ASP.NET Application  </h1>
-       
-        <p class="lead">Welcome home !</p>
-
+    <section class="col-12 bg-secondary" aria-labelledby="aspnetTitle">
+            <div class="col-12">
+                <div    class="container-fluid bsb-hero-6 bsb-overlay col-12 " 
+                        style="--bsb-overlay-opacity: 0.5; 
+                            --bsb-overlay-bg-color: var(--bs-light-rgb); 
+                            background-image: url('/Assets/Images/HomeImage.jpg');
+                            background-repeat: no-repeat;
+                            filter: grayscale(40%) contrast(90%)  opacity(1);
+                            /* Additional styling to ensure the background covers the card */
+                            background-size: cover;
+                            background-position: center;
+                            background-repeat: no-repeat;
+                            height: 85vh;
+                            position:relative;
+                ">
+                    <div class="row justify-content-md-center align-items-center " style="z-index:1; position:absolute; width:100%; height:100%">
+                        <div class="col-12 col-md-11 col-xl-6  container rounded p-4" style="background-color: rgba(255, 255, 255,0.8) ">
+                            <h6 class="display-6 text-center text-md-start text-shadow-head fw-bold mb-2">Welcome to EventPlanner admin panel !</h6>
+                            <p class="lead text-center text-md-start text-shadow-body mb-5 d-flex justify-content-sm-center justify-content-md-start">
+                                <span class="col-12 col-sm-10 col-md-9 col-xxl-8">Bring people together! Create events where people can meet, have fun, and make unforgettable memories.</span>
+                            </p>
+                            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center justify-content-md-start">
+                                <a href="/Admin/Dashboard" class="btn bsb-btn-2xl btn-outline-primary">Explore Admin Panel</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </section>
 
    

@@ -1,0 +1,467 @@
+﻿@using internPlatform.Application.Extensions
+@{
+    ViewBag.Title = "Statistics";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminMenuLayout.cshtml";
+}
+
+<h2>SuperAdmin Statistics <i class="bi bi-bar-chart-line-fill h4"></i></h2>
+
+
+<div class="container">
+
+    <section class="pb-3 pb-md-4 pb-xl-5 ">
+        <div class="container">
+            <div class="row gy-3 gy-md-4">
+                <div class="col-12 col-sm-6 col-xxl-3">
+                    <div class="card widget-card border-light shadow-sm">
+                        <div class="card-body p-4">
+                            <div class="row">
+                                <div class="col-8">
+                                    <h5 class="card-title widget-card-title mb-3 text-nowrap">Views</h5>
+                                    <h4 class="card-subtitle text-body-secondary m-0" id="statisticViews">0</h4>
+                                </div>
+                                <div class="col-4">
+                                    <div class="d-flex justify-content-end">
+                                        <div class="lh-1 text-white bg-primary rounded-circle p-3 d-flex align-items-center justify-content-center">
+                                            <i class="bi bi-window-stack fs-4"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="d-flex align-items-center mt-3">
+                                        <span class="lh-1 me-3 rounded-circle p-1 d-flex align-items-center justify-content-center">
+                                            <i class="bi bi-arrow-right-short bsb-rotate-45"></i>
+                                        </span>
+                                        <div>
+                                            <p class="fs-7 mb-0" id="statisticViews_lastWeek">0%</p>
+                                            <p class="fs-7 mb-0 text-secondary">since last week</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-xxl-3">
+                    <div class="card widget-card border-light shadow-sm">
+                        <div class="card-body p-4">
+                            <div class="row">
+                                <div class="col-8">
+                                    <h5 class="card-title widget-card-title mb-3 text-nowrap" >Posts</h5>
+                                    <h4 class="card-subtitle text-body-secondary m-0" id="statisticEvents">0</h4>
+                                </div>
+                                <div class="col-4">
+                                    <div class="d-flex justify-content-end">
+                                        <div class="lh-1 text-white bg-primary rounded-circle p-3 d-flex align-items-center justify-content-center">
+                                            <i class="bi bi-file-post fs-4"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="d-flex align-items-center mt-3">
+                                        <span class="lh-1 me-3 rounded-circle p-1 d-flex align-items-center justify-content-center">
+                                            <i class="bi bi-arrow-right-short bsb-rotate-n45"></i>
+                                        </span>
+                                        <div>
+                                            <p class="fs-7 mb-0" id="statisticEvents_lastWeek">0%</p>
+                                            <p class="fs-7 mb-0 text-secondary">since last week</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-xxl-3">
+                    <div class="card widget-card border-light shadow-sm">
+                        <div class="card-body p-4">
+                            <div class="row">
+                                <div class="col-8">
+                                    <h5 class="card-title widget-card-title mb-3 text-nowrap">Users</h5>
+                                    <h4 class="card-subtitle text-body-secondary m-0" id="statisticUsers">0</h4>
+                                </div>
+                                <div class="col-4">
+                                    <div class="d-flex justify-content-end">
+                                        <div class="lh-1 text-white bg-primary rounded-circle p-3 d-flex align-items-center justify-content-center">
+                                            <i class="bi bi-person fs-4"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="d-flex align-items-center mt-3">
+                                        <span class="lh-1 me-3 rounded-circle p-1 d-flex align-items-center justify-content-center">
+                                            <i class="bi bi-arrow-right-short bsb-rotate-n45"></i>
+                                        </span>
+                                        <div>
+                                            <p class="fs-7 mb-0" id="statisticUsers_lastWeek">0%</p>
+                                            <p class="fs-7 mb-0 text-secondary">since last week</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-xxl-3">
+                    <div class="card widget-card border-light shadow-sm">
+                        <div class="card-body p-4">
+                            <div class="row">
+                                <div class="col-8">
+                                    <h5 class="card-title widget-card-title mb-3 text-nowrap">Subscribers</h5>
+                                    <h4 class="card-subtitle text-body-secondary m-0" id="statisticSubscribers">0</h4>
+                                </div>
+                                <div class="col-4">
+                                    <div class="d-flex justify-content-end">
+                                        <div class="lh-1 text-white bg-primary rounded-circle p-3 d-flex align-items-center justify-content-center">
+                                            <i class="bi bi-bookmarks fs-4"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="d-flex align-items-center mt-3">
+                                        <span class="lh-1 me-3 rounded-circle p-1 d-flex align-items-center justify-content-center">
+                                            <i class="bi bi-arrow-right-short bsb-rotate-45"></i>
+                                        </span>
+                                        <div>
+                                            <p class="fs-7 mb-0" id="statisticSubscribers_lastWeek">0%</p>
+                                            <p class="fs-7 mb-0 text-secondary">since last week</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="row">
+
+        <section class="pb-3 pb-md-4 pb-xl-5 ">
+            <div class="container ">
+                <div class="row gy-3 gy-md-4">
+                    <div class="col-12 col-lg-6 col-xl-7">
+                        <div class="card widget-card border-light shadow-sm ">
+                            <div class="card-body p-4">
+                                <div class="d-block d-sm-flex align-items-center justify-content-between mb-3">
+                                    <div class="mb-3 mb-sm-0">
+                                        <h5 class="card-title widget-card-title">Posting History</h5>
+                                    </div>
+                                    <div>
+                                        <select class="form-select text-secondary border-light-subtle">
+                                            <option value="1">Month</option>
+                                            <option value="2">Week</option>
+                                            <option value="3">Day</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div id="bsb-chart-5"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 col-xl-5">
+                        <div class="card widget-card border-light shadow-sm h-100">
+                            <div class="card-body p-4">
+                                <div class="d-block d-sm-flex align-items-center justify-content-between mb-3">
+                                    <div class="mb-3 mb-sm-0">
+                                        <h5 class="card-title widget-card-title">Posts Categories</h5>
+                                    </div>
+                                    <div>
+                                        <select class="form-select text-secondary border-light-subtle">
+                                            <option value="1">March 2023</option>
+                                            <option value="2">April 2023</option>
+                                            <option value="3">May 2023</option>
+                                            <option value="4">June 2023</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div id="bsb-chart-4"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+
+    <div class="row">
+        <section class="pb-3 pb-md-4 pb-xl-5 ">
+            <div class="container">
+                <div class="row gy-3 gy-md-4">
+
+                    <div class="col-12 col-lg-6 col-xl-5 ">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="card widget-card border-light shadow-sm ">
+                                    <div class="card-body p-4">
+                                        <h5 class="card-title widget-card-title mb-1">Visitor Stats</h5>
+                                        <p class="fs-7 text-secondary mb-4">Overview</p>
+                                        <div id="bsb-chart-6" class="mb-4"></div>
+                                        <div class="row gy-4">
+                                            <div class="col-12">
+                                                <div class="row align-items-center">
+                                                    <div class="col-8">
+                                                        <div class="d-flex align-items-center">
+                                                            <div>
+                                                                <div class="fs-5 bsb-w-50 bsb-h-50 bg-primary-subtle text-primary rounded-2 d-flex align-items-center justify-content-center me-3">
+                                                                    <i class="bi bi-browser-chrome"></i>
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <h6 class="m-0">Chrome</h6>
+                                                                <p class="text-secondary m-0 fs-7">since last week</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <h6 class="fs-7 d-flex align-items-center justify-content-end m-0">
+                                                            <span class="bg-primary-subtle text-primary rounded-2 py-1 px-2" id="visitors_chrome">0</span>
+                                                        </h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="row align-items-center">
+                                                    <div class="col-8">
+                                                        <div class="d-flex align-items-center">
+                                                            <div>
+                                                                <div class="fs-5 bsb-w-50 bsb-h-50 bg-success-subtle text-success rounded-2 d-flex align-items-center justify-content-center me-3">
+                                                                    <i class="bi bi-browser-safari"></i>
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <h6 class="m-0">Safari</h6>
+                                                                <p class="text-secondary m-0 fs-7">since last week</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <h6 class="fs-7 d-flex align-items-center justify-content-end m-0">
+                                                            <span class="bg-success-subtle text-success rounded-2 py-1 px-2" id="visitors_Safari">0</span>
+                                                        </h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="row align-items-center">
+                                                    <div class="col-8">
+                                                        <div class="d-flex align-items-center">
+                                                            <div>
+                                                                <div class="fs-5 bsb-w-50 bsb-h-50 bg-danger-subtle text-danger rounded-2 d-flex align-items-center justify-content-center me-3">
+                                                                    <i class="bi bi-browser-firefox"></i>
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <h6 class="m-0">Firefox</h6>
+                                                                <p class="text-secondary m-0 fs-7">since last week</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <h6 class="fs-7 d-flex align-items-center justify-content-end m-0">
+                                                            <span class="bg-danger-subtle text-danger rounded-2 py-1 px-2" id="visitors_Firefox">0</span>
+                                                        </h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="row align-items-center">
+                                                    <div class="col-8">
+                                                        <div class="d-flex align-items-center">
+                                                            <div>
+                                                                <div class="fs-5 bsb-w-50 bsb-h-50 bg-info-subtle text-info rounded-2 d-flex align-items-center justify-content-center me-3">
+                                                                    <i class="bi bi-browser-edge"></i>
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <h6 class="m-0">Edge</h6>
+                                                                <p class="text-secondary m-0 fs-7">since last week</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <h6 class="fs-7 d-flex align-items-center justify-content-end m-0">
+                                                            <span class="bg-info-subtle text-info rounded-2 py-1 px-2" id="visitors_Edge">0</span>
+                                                        </h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-6 col-xl-7 ">
+                        <div class="container " style="height:100%">
+                            <div class="row justify-content-center" style="height:100%">
+                                <div class="card widget-card border-light shadow-sm " style="height:100%">
+                                    <div class="card-body p-4 ">
+                                        <h5 class="card-title widget-card-title mb-4">User Information</h5>
+                                        <div class="row gy-4">
+                                            <div class="col-12">
+                                                <div class="row align-items-center">
+                                                    <div class="col-8">
+                                                        <div class="d-flex align-items-center">
+                                                            <div>
+                                                                <div class="fs-5 bsb-w-50 bsb-h-50 bg-primary-subtle text-primary rounded-2 d-flex align-items-center justify-content-center me-3">
+                                                                    <i class="bi bi-file-earmark-lock2-fill"></i>
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <h6 class="m-0">Authentification</h6>
+                                                                <p class="text-secondary m-0 fs-7">Verified Accounts</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <h6 class="text-end" id="statisticAuthUsers" >0</h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="row align-items-center">
+                                                    <div class="col-8">
+                                                        <div class="d-flex align-items-center">
+                                                            <div>
+                                                                <div class="fs-5 bsb-w-50 bsb-h-50 bg-primary-subtle text-primary rounded-2 d-flex align-items-center justify-content-center me-3">
+                                                                    <i class="bi bi-check-circle-fill"></i>
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <h6 class="m-0">Active</h6>
+                                                                <p class="text-secondary m-0 fs-7">At least 1 post</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <h6 class="text-end text-success" id="statisticActiveUsers">0</h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="row align-items-center">
+                                                    <div class="col-8">
+                                                        <div class="d-flex align-items-center">
+                                                            <div>
+                                                                <div class="fs-5 bsb-w-50 bsb-h-50 bg-primary-subtle text-primary rounded-2 d-flex align-items-center justify-content-center me-3">
+                                                                    <i class="bi bi-clock-fill"></i>
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <h6 class="m-0">Passive</h6>
+                                                                <p class="text-secondary m-0 fs-7">Not posted yet</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <h6 class="text-end" id="statisticPassiveUsers">0</h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="row align-items-center">
+                                                    <div class="col-8">
+                                                        <div class="d-flex align-items-center">
+                                                            <div>
+                                                                <div class="fs-5 bsb-w-50 bsb-h-50 bg-primary-subtle text-primary rounded-2 d-flex align-items-center justify-content-center me-3">
+                                                                    <i class="bi bi-arrow-down-right-square-fill"></i>
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <h6 class="m-0">Inactive</h6>
+                                                                <p class="text-secondary m-0 fs-7">Not logged since last 3 months</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <h6 class="text-end text-warning" id="statisticInactive">0</h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="row align-items-center">
+                                                    <div class="col-8">
+                                                        <div class="d-flex align-items-center">
+                                                            <div>
+                                                                <div class="fs-5 bsb-w-50 bsb-h-50 bg-primary-subtle text-primary rounded-2 d-flex align-items-center justify-content-center me-3">
+                                                                    <i class="bi bi-stop-circle-fill"></i>
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <h6 class="m-0">Black List</h6>
+                                                                <p class="text-secondary m-0 fs-7">Blocked Accounts</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <h6 class="text-end text-danger" id="statisticBlockedUsers">0</h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <div class="row align-items-center">
+                                                    <div class="col-8">
+                                                        <div class="d-flex align-items-center">
+                                                            <div>
+                                                                <div class="fs-5 bsb-w-50 bsb-h-50 bg-primary-subtle text-primary rounded-2 d-flex align-items-center justify-content-center me-3">
+                                                                    <i class="bi bi-opencollective"></i>
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <h6 class="m-0  fw-bold">Total</h6>
+                                                                <p class="text-secondary m-0 fs-7 ">Created accounts</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <h6 class="text-end " id="statisticTotalUsers">0</h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+
+
+    <div class="row col-12 m-0 p-0">
+        <canvas id="LineItem"></canvas>
+    </div>
+
+
+
+
+</div>
+
+
+@section Scripts{
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+}
+
+@Url.ScriptVersioned("~/Scripts/ChartJS/LineItem.js")
+@Url.ScriptVersioned("~/Scripts/ChartJS/BarChart.js")
+@Url.ScriptVersioned("~/Scripts/ChartJS/CircleChart.js")
+@Url.ScriptVersioned("~/Scripts/ChartJS/LineChart.js")
+@Url.ScriptVersioned("~/Scripts/ChartJS/CardChart.js")

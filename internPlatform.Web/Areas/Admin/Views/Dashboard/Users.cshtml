@@ -7,44 +7,24 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminMenuLayout.cshtml";
 }
 
-    <h2>Users &nbsp;<i class="bi bi-people-fill h4"></i> </h2>
+<h2>Users &nbsp;<i class="bi bi-people-fill h4"></i> </h2>
 
-    @*<table class="table" style="max-height:90vh; overflow-y:auto">
+<div class="container overflow-x-auto col-12">
+    <table id="tblData" class="table table-bordered table-striped col-12">
         <thead>
             <tr>
-                <th>User Name</th>
-                <th>User Role</th>
+                <th class="text-center">User Name</th>
+                <th class="text-center">Role</th>
                 <th></th>
             </tr>
         </thead>
-        <tbody>
-           @foreach (var ur in Model)
-           {
-                <tr>
-                    <td>@ur.User.UserName</td>
-                    <td>
-                        @ur.Role
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "UpdateUser", "Dashboard", new { id = ur.User.Id }, new { @class = "btn text-success" })
-                        @Html.ActionLink("Delete", "DeleteUser", "Dashboard", new { id = ur.User.Id }, new { @class = "btn text-danger" })
-                    </td>
-                </tr>
-           }
-        </tbody>
-    </table>*@
 
-    <div class="container overflow-x-auto col-12">
-        <table id="tblData" class="table table-bordered table-striped col-12">
-            <thead>
-                <tr>
-                    <th class="text-center">User Name</th>
-                    <th class="text-center">Role</th>
-                    <th></th>
-                </tr>
-            </thead>
+    </table>
+</div>
 
-        </table>
-    </div>
+@section Scripts{
+    <script type="text/javascript" src="//cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
+}
 
 @Url.ScriptVersioned("~/Scripts/datatables/users.js")
+

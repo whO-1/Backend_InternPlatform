@@ -9,7 +9,7 @@
         <div class="row py-4">
 
             <div class="col-12 text-end">
-                @Html.ActionLink("Add Event", "EventUpSert", "Dashboard", new { area = "Admin" }, new { @class = "btn btn-warning" })
+                @Html.ActionLink(" + Add Event", "EventUpSert", "Dashboard", new { area = "Admin" }, new { @class = "btn btn-warning text-bold" })
             </div>
         </div>
     </div>
@@ -21,6 +21,7 @@
                     <th class="text-center">Title</th>
                     <th class="text-center">Description</th>
                     <th class="text-center">Author</th>
+                    <th class="text-center">Start Date</th>
                     <th class="text-center">Entry Type</th>
                     <th class="text-center">Age Group</th>
                     <th class="text-center">Category</th>
@@ -32,6 +33,10 @@
         </table>
     </div>
 
+}
+
+@section Scripts{
+    <script type="text/javascript" src="//cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
 }
 
 @Url.ScriptVersioned("~/Scripts/datatables/events.js")

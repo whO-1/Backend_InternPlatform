@@ -1,53 +1,41 @@
 ﻿@model internPlatform.Domain.Models.ViewModels.RegisterViewModel
 @{
     ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
 }
 
-<main aria-labelledby="title" style="height:82vh; overflow-y:auto">
+<div class=" container d-flex flex-column align-items-center  p-0 m-0">
+    <p id="title" class="text-secondary p-0 m-0 mt-3" style="font-size:14px"> Create now your account </p>
+    <div class="row col-12 mt-2">
 
-    <div class="col-12 d-flex justify-content-center">
-
-        <div class="conatainer d-flex flex-column align-items-center justify-content-center col-11 col-lg-5 p-4 " style="border: 5px solid rgb(41 44 62); border-radius: 20px">
-
-            <i class="bi bi-person-circle display-1"></i>
-            <h2 id="title">@ViewBag.Title</h2>
-
-            <div class="row col-12 mt-4">
-
-                @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { role = "form" }))
-                {
-                    @Html.AntiForgeryToken()
-                    <h4>Create a new account.</h4>
-                    <hr />
-                    @Html.ValidationSummary("", new { @class = "text-danger" })
-                    <div class="row">
-                        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 col-form-label" })
-                        <div class="col-md-10">
-                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                        </div>
-                    </div>
-                    <div class="row">
-                        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 col-form-label" })
-                        <div class="col-md-10">
-                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        </div>
-                    </div>
-                    <div class="row">
-                        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 col-form-label" })
-                        <div class="col-md-10">
-                            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="offset-md-2 col-md-10">
-                            <input type="submit" value="Register" class="btn btn-outline-dark" />
-                        </div>
-                    </div>
-                }
+        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary("", new { @class = "text-danger help-text" })
+            <div class="row col-12  p-0 m-0 ">
+                <div class="col-12 p-0 m-0">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control py-3 help-text", @placeholder="Email" })
+                </div>
             </div>
-        </div>
+            <div class="row mt-2 col-12 p-0 m-0 ">
+                <div class="col-12 p-0 m-0">
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control py-3 help-text", @placeholder = "Password" })
+                </div>
+            </div>
+            <div class="row mt-2 col-12 p-0 m-0">
+                <div class="col-12 p-0 m-0">
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control py-3 help-text", @placeholder = "Confirm password" })
+                </div>
+            </div>
+            <div class="row">
+                <div class=" col-12">
+                    <input type="submit" value="Register" class="btn btn-outline-dark col-12 mt-3" />
+                </div>
+            </div>
+        }
     </div>
-</main>
+</div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

@@ -16,23 +16,18 @@ namespace internPlatform.Domain.Entities
         [DisplayName("Event Title")]
         public string Title { get; set; }
 
-
         [DisplayName("Event Description")]
         public string Description { get; set; }
-
         public string SpecialGuests { get; set; }
-
         public int? AgeGroupId { get; set; }
         [ForeignKey("Id")]
         public virtual AgeGroup Age { get; set; }
-
         public int? EntryTypeId { get; set; }
         [ForeignKey("Id")]
         public virtual EntryType Entry { get; set; }
-
         [DisplayName("Author")]
         [Required]
-        public string AuthorId { get; set; }
+        public string Author { get; set; }
 
         [DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-ddTHH:mm}", ApplyFormatInEditMode = true)]
@@ -45,10 +40,16 @@ namespace internPlatform.Domain.Entities
         [Required]
         public DateTime EndDate { get; set; }
 
-
         public TimeStamp TimeStamp { get; set; }
         public Location EventLocation { get; set; }
-        public virtual ICollection<Category> Categories { get; set; } = new List<Category>();
+        public bool IsDeleted { get; set; }
+        public bool IsBlocked { get; set; }
+        public int Likes { get; set; }
+        public int Views { get; set; }
+        public virtual ICollection<Category> Categories { get; set; }
+
+        public virtual ICollection<Image> Images { get; set; }
+        public virtual User User { get; set; }
 
 
         public Event()

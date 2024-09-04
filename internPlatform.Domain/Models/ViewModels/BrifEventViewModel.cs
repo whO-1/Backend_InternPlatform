@@ -14,5 +14,6 @@ namespace internPlatform.Domain.Models.ViewModels
         public string Author { get; set; }
         public List<string> SelectedCategories { get; set; } = new List<string>();
         public DateTime LastUpdate { get; set; }
+        public DateTime StartDate { get; set; }
     }
 }

@@ -1,13 +1,13 @@
 async function initMap() {
     
     // Data import
-    const long = document.getElementById("Latitude");
-    const lat = document.getElementById("Longitude");
+    const long = document.getElementById("Longitude");
+    const lat = document.getElementById("Latitude");
     let longNumber = (long.value !== '')?  Number(long.value.replace(",", ".")) : null;
     let latNumber = (lat.value !== '') ? Number(lat.value.replace(",", ".")) : null;
 
-    //console.log("long", long.value==='' )
-    //console.log("lat", lat.value)
+    
+
     //console.log("longNumber", longNumber)
     //console.log("latNumber", latNumber)
     //init in case of new map
@@ -15,7 +15,11 @@ async function initMap() {
         latNumber = 47.02;
         longNumber = 28.83;
     }
-    
+
+    long.value = longNumber.toFixed(6);
+    lat.value = latNumber.toFixed(6);
+
+
     const { Map } = await google.maps.importLibrary("maps");
     const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary("marker");
     const myLatlng = { lat: latNumber, lng: longNumber };

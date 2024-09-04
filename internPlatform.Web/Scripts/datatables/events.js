@@ -13,7 +13,12 @@ let dataTable;
 
 function loadDataTable() {
     dataTable = $('#tblData').DataTable({
-        "ajax": { url: '/admin/dashboard/eventsgetall' },
+        "serverSide": true,
+        "processing": true,
+        "ajax": {
+            url: '/admin/dashboard/eventsgetall',
+            type: 'GET'
+        },
         "columns": [
             {
                 data: 'LastUpdate',
@@ -30,8 +35,29 @@ function loadDataTable() {
                 }
             },
             { data: 'Title', "width": "20%" },
-            { data: 'Description', "width": "25%" },
+            {
+                data: 'Description',
+                "width": "20%",
+                "render": function (data, type, row) {
+                    
+                    return (data !== null)? data.length > 30 ? data.substring(0, 30) + '...' : data: data;
+                }
+            },
             { data: 'Author', "width": "15%" },
+            {
+                data: 'StartDate',
+                "width": "5%",
+                "render": function (data) {
+                    // Parse the /Date(xxxxx)/ format and convert to Date object
+                    const timestamp = parseInt(data.replace(/\/Date\((-?\d+)\)\//, '$1'));
+                    const date = new Date(timestamp);
+                    // Format the date as needed (e.g., yyyy-MM-dd)
+                    const day = date.getDate().toString().padStart(2, '0');
+                    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+                    const year = date.getFullYear();
+                    return `${day}.${month}.${year}`;
+                }
+            },
             { data: 'EntryType', "width": "5%" },
             { data: 'AgeGroup', "width": "5%" },
             { data: 'SelectedCategories', "width": "5%" },

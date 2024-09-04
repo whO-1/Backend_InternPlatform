@@ -86,17 +86,33 @@
     <Compile Include="Data\ApplicationRoleManagement.cs" />
     <Compile Include="Data\ApplicationUser.cs" />
     <Compile Include="Data\ProjectDBContext.cs" />
-    <Compile Include="Entity\202407121012234_CreateAndSeedDB.cs" />
-    <Compile Include="Entity\202407121012234_CreateAndSeedDB.Designer.cs">
-      <DependentUpon>202407121012234_CreateAndSeedDB.cs</DependentUpon>
+    <Compile Include="Entity\202408120828573_CreateTablesAndSeed.cs" />
+    <Compile Include="Entity\202408120828573_CreateTablesAndSeed.Designer.cs">
+      <DependentUpon>202408120828573_CreateTablesAndSeed.cs</DependentUpon>
     </Compile>
-    <Compile Include="Entity\202407181509208_EventEntityUpdate.cs" />
-    <Compile Include="Entity\202407181509208_EventEntityUpdate.Designer.cs">
-      <DependentUpon>202407181509208_EventEntityUpdate.cs</DependentUpon>
+    <Compile Include="Entity\202408120904451_UpdateEventEntity.cs" />
+    <Compile Include="Entity\202408120904451_UpdateEventEntity.Designer.cs">
+      <DependentUpon>202408120904451_UpdateEventEntity.cs</DependentUpon>
     </Compile>
-    <Compile Include="Entity\202407181520447_EventEntityUpdateDate.cs" />
-    <Compile Include="Entity\202407181520447_EventEntityUpdateDate.Designer.cs">
-      <DependentUpon>202407181520447_EventEntityUpdateDate.cs</DependentUpon>
+    <Compile Include="Entity\202408200635511_AddFaqEntity.cs" />
+    <Compile Include="Entity\202408200635511_AddFaqEntity.Designer.cs">
+      <DependentUpon>202408200635511_AddFaqEntity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\202408260813272_UpdateImageEntity.cs" />
+    <Compile Include="Entity\202408260813272_UpdateImageEntity.Designer.cs">
+      <DependentUpon>202408260813272_UpdateImageEntity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\202408291455532_AddErrorLogs.cs" />
+    <Compile Include="Entity\202408291455532_AddErrorLogs.Designer.cs">
+      <DependentUpon>202408291455532_AddErrorLogs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\202408291532239_UpdateErrorLogs.cs" />
+    <Compile Include="Entity\202408291532239_UpdateErrorLogs.Designer.cs">
+      <DependentUpon>202408291532239_UpdateErrorLogs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\202408301045459_UpdateErrorLog.cs" />
+    <Compile Include="Entity\202408301045459_UpdateErrorLog.Designer.cs">
+      <DependentUpon>202408301045459_UpdateErrorLog.cs</DependentUpon>
     </Compile>
     <Compile Include="Entity\Configuration.cs" />
     <Compile Include="Identity\202406201318104_UserMigration.cs" />
@@ -124,14 +140,26 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="Entity\202407121012234_CreateAndSeedDB.resx">
-      <DependentUpon>202407121012234_CreateAndSeedDB.cs</DependentUpon>
+    <EmbeddedResource Include="Entity\202408120828573_CreateTablesAndSeed.resx">
+      <DependentUpon>202408120828573_CreateTablesAndSeed.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Entity\202407181509208_EventEntityUpdate.resx">
-      <DependentUpon>202407181509208_EventEntityUpdate.cs</DependentUpon>
+    <EmbeddedResource Include="Entity\202408120904451_UpdateEventEntity.resx">
+      <DependentUpon>202408120904451_UpdateEventEntity.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Entity\202407181520447_EventEntityUpdateDate.resx">
-      <DependentUpon>202407181520447_EventEntityUpdateDate.cs</DependentUpon>
+    <EmbeddedResource Include="Entity\202408200635511_AddFaqEntity.resx">
+      <DependentUpon>202408200635511_AddFaqEntity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Entity\202408260813272_UpdateImageEntity.resx">
+      <DependentUpon>202408260813272_UpdateImageEntity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Entity\202408291455532_AddErrorLogs.resx">
+      <DependentUpon>202408291455532_AddErrorLogs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Entity\202408291532239_UpdateErrorLogs.resx">
+      <DependentUpon>202408291532239_UpdateErrorLogs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Entity\202408301045459_UpdateErrorLog.resx">
+      <DependentUpon>202408301045459_UpdateErrorLog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Identity\202406201318104_UserMigration.resx">
       <DependentUpon>202406201318104_UserMigration.cs</DependentUpon>

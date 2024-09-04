@@ -86,7 +86,10 @@
       <HintPath>..\packages\Microsoft.Web.Infrastructure.2.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net6.0\SixLabors.ImageSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.5.3.3\lib\net46\NLog.dll</HintPath>
     </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
@@ -99,10 +102,13 @@
       <HintPath>..\packages\System.ComponentModel.Annotations.5.0.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.8.0.0\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
     </Reference>
@@ -147,6 +153,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\LoggerExtensions.cs" />
+    <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="Helpers\RoleHelper.cs" />
     <Compile Include="Extensions\UrlHelperExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -155,17 +163,30 @@
     <Compile Include="Services\CustomAuthorizeAttribute.cs" />
     <Compile Include="Services\EntityManageService.cs" />
     <Compile Include="Services\EventManageService.cs" />
+    <Compile Include="Services\FilesOperations\FileService.cs" />
+    <Compile Include="Services\FilesOperations\IFileBuffer.cs" />
+    <Compile Include="Services\FilesOperations\IFileService.cs" />
+    <Compile Include="Services\FilesOperations\IFileStore.cs" />
+    <Compile Include="Services\FilesOperations\IFileValidate.cs" />
     <Compile Include="Services\IApiService.cs" />
     <Compile Include="Services\IEntityManageService.cs" />
     <Compile Include="Services\IEventManageService.cs" />
+    <Compile Include="Services\IImageEntityService.cs" />
     <Compile Include="Services\ILinkEntityManageService.cs" />
+    <Compile Include="Services\ImageEntityService.cs" />
     <Compile Include="Services\IUserRoleService.cs" />
     <Compile Include="Services\LinkEntityManageService.cs" />
     <Compile Include="Services\Mappings\AgeGroupConvertor.cs" />
     <Compile Include="Services\Mappings\CategoryConvertor.cs" />
     <Compile Include="Services\Mappings\EntryTypeConvertor.cs" />
+    <Compile Include="Services\Mappings\FaqConvertor.cs" />
     <Compile Include="Services\Mappings\IBaseConvertor.cs" />
+    <Compile Include="Services\Mappings\ImageConvertor.cs" />
     <Compile Include="Services\Mappings\LinkConvertor.cs" />
+    <Compile Include="Services\Statistics\ErrorsService.cs" />
+    <Compile Include="Services\Statistics\IErrorsService.cs" />
+    <Compile Include="Services\Statistics\IStatisticsService.cs" />
+    <Compile Include="Services\Statistics\StatisticsService.cs" />
     <Compile Include="Services\UserRoleService.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -183,4 +204,9 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+  </Target>
 </Project>
